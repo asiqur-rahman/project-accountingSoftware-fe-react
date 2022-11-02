@@ -72,7 +72,7 @@ const LockScreen = () => {
                 <p>Not you ? return <Link to="/login" className="fw-medium text-primary"> Sign In
                             </Link> </p>
                 <p>
-                  © {new Date().getFullYear()} Qovex. Crafted with{" "}
+                  © {new Date().getFullYear()} BT_Solution. Crafted with{" "}
                   <i className="mdi mdi-heart text-danger" /> by Themesbrand
                   </p>
               </div>

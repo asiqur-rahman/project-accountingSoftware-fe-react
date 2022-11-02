@@ -44,7 +44,7 @@ const theme = {
     colors: ["#556ee6", "#34c38f"]
   }
 }
-TuiChart.registerTheme("qovexTheme", theme)
+TuiChart.registerTheme("bt-solutionTheme", theme)
 
 const BoxPlotChartToast = props => {
   const data = {

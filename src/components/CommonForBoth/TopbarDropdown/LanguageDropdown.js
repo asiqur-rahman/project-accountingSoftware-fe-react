@@ -53,7 +53,7 @@ const LanguageDropdown = () => {
             >
               <img
                 src={get(languages, `${key}.flag`)}
-                alt="Qovex"
+                alt="BT_Solution"
                 className="me-1"
                 height="12"
               />

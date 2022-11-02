@@ -29,7 +29,7 @@ const Dashboard = () => {
 
               <div className="page-title-right">
                 <ol className="breadcrumb m-0">
-                  <li className="breadcrumb-item active">Welcome to Qovex Dashboard</li>
+                  <li className="breadcrumb-item active">Welcome to BT_Solution Dashboard</li>
                 </ol>
               </div>
 
@@ -38,8 +38,8 @@ const Dashboard = () => {
         </Row>
 
         <Row>
-          <Col lg={12}>
-            <Card>
+          <Col lg={3}>
+            <Card >
               <CardBody>
                 <div className="d-flex align-items-start">
                   <div className="avatar-sm font-size-20 me-3">
@@ -69,34 +69,100 @@ const Dashboard = () => {
                 </div>
               </CardBody>
             </Card>
-            <Card>
+          </Col>
+          <Col lg={3}>
+            <Card >
               <CardBody>
                 <div className="d-flex align-items-start">
                   <div className="avatar-sm font-size-20 me-3">
                     <span className="avatar-title bg-soft-primary text-primary rounded">
-                      <i className="mdi mdi-account-multiple-outline"></i>
+                      <i className="mdi mdi-tag-plus-outline"></i>
                     </span>
                   </div>
                   <div className="flex-1">
-                    <div className="font-size-16 mt-2">New Users</div>
-
+                    <div className="font-size-16 mt-2">New Orders</div>
                   </div>
                 </div>
-                <h4 className="mt-4">2,456</h4>
-                <Row>
+                <h4 className="mt-4">1,368</h4>
+                <div className="row">
                   <div className="col-7">
-                    <p className="mb-0"><span className="text-success me-2"> 0.16% <i
+                    <p className="mb-0"><span className="text-success me-2"> 0.28% <i
                       className="mdi mdi-arrow-up"></i> </span></p>
                   </div>
                   <div className="col-5 align-self-center">
+
                     <Progress
                       value="62"
-                      color="success"
+                      color="primary"
                       className="bg-transparent progress-sm"
                       size="sm"
                     />
                   </div>
-                </Row>
+                </div>
+              </CardBody>
+            </Card>
+          </Col>
+          <Col lg={3}>
+            <Card >
+              <CardBody>
+                <div className="d-flex align-items-start">
+                  <div className="avatar-sm font-size-20 me-3">
+                    <span className="avatar-title bg-soft-primary text-primary rounded">
+                      <i className="mdi mdi-tag-plus-outline"></i>
+                    </span>
+                  </div>
+                  <div className="flex-1">
+                    <div className="font-size-16 mt-2">New Orders</div>
+                  </div>
+                </div>
+                <h4 className="mt-4">1,368</h4>
+                <div className="row">
+                  <div className="col-7">
+                    <p className="mb-0"><span className="text-success me-2"> 0.28% <i
+                      className="mdi mdi-arrow-up"></i> </span></p>
+                  </div>
+                  <div className="col-5 align-self-center">
+
+                    <Progress
+                      value="62"
+                      color="primary"
+                      className="bg-transparent progress-sm"
+                      size="sm"
+                    />
+                  </div>
+                </div>
+              </CardBody>
+            </Card>
+          </Col>
+          <Col lg={3}>
+            <Card >
+              <CardBody lg={3}>
+                <div className="d-flex align-items-start">
+                  <div className="avatar-sm font-size-20 me-3">
+                    <span className="avatar-title bg-soft-primary text-primary rounded">
+                      <i className="mdi mdi-tag-plus-outline"></i>
+                    </span>
+                  </div>
+                  <div className="flex-1">
+                    <div className="font-size-16 mt-2">New Orders</div>
+                  </div>
+                </div>
+                <h4 className="mt-4">1,368</h4>
+                <div className="row">
+                  <div className="col-7">
+                    <p className="mb-0"><span className="text-success me-2"> 0.28% <i
+                      className="mdi mdi-arrow-up"></i> </span></p>
+                  </div>
+                  <div className="col-5 align-self-center">
+
+                    <Progress
+                      value="62"
+                      color="primary"
+                      className="bg-transparent progress-sm"
+                      size="sm"
+                    />
+                  </div>
+                </div>
               </CardBody>
             </Card>
           </Col>

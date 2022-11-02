@@ -576,7 +576,7 @@ const UiCards = props => {
             <h4 className="my-3">Cards Masonry</h4>
             <CardColumns>
               <Card>
-                <CardImg top src={img3} alt="qovex" />
+                <CardImg top src={img3} alt="bt-solution" />
                 <CardBody>
                   <CardTitle>Card title that wraps to a new line</CardTitle>
                   <CardText>
@@ -614,7 +614,7 @@ const UiCards = props => {
                 </CardBody>
               </Card>
               <Card>
-                <CardImg top src={img5} alt="qovex" />
+                <CardImg top src={img5} alt="bt-solution" />
                 <CardBody>
                   <CardTitle>Card title</CardTitle>
                   <CardText>
@@ -655,7 +655,7 @@ const UiCards = props => {
                 </CardBody>
               </Card>
               <Card>
-                <CardImg top src={img7} alt="qovex" />
+                <CardImg top src={img7} alt="bt-solution" />
               </Card>
               <Card className="p-3 text-right">
                 <blockquote className="blockquote mb-0">

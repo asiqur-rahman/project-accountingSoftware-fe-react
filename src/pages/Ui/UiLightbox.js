@@ -128,7 +128,7 @@ const UiLightbox = () => {
                           setisFits(true)
                         }}
                         className="img-fluid"
-                        alt="qovex"
+                        alt="bt-solution"
                         src={img2}
                         width="145"
                       />

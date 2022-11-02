@@ -44,7 +44,7 @@ const theme = {
     colors: ["#556ee6", "#34c38f", "#f1b44c", "#f46a6a"]
   }
 }
-TuiChart.registerTheme("qovexTheme", theme)
+TuiChart.registerTheme("bt-solutionTheme", theme)
 
 const BubbleChartToast = props => {
   const data = {

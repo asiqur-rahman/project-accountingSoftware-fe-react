@@ -28,7 +28,7 @@ var theme = {
     colors: ["#556ee6", "#34c38f", "#f46a6a", "#50a5f1", "#f1b44c"],
   },
 }
-TuiChart.registerTheme("qovexTheme", theme)
+TuiChart.registerTheme("bt-solutionTheme", theme)
 
 const PieChartToast = props => {
   const data = {

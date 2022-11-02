@@ -305,7 +305,7 @@ const RightSidebar = props => {
 
               <div className="mb-2">
                 <Link
-                  to="//qovex-v-light.react.themesbrand.com"
+                  to="//bt-solution-v-light.braintechsolution.com"
                   target="_blank"
                 >
                   <img
@@ -317,7 +317,7 @@ const RightSidebar = props => {
               </div>
 
               <div className="mb-2">
-                <Link to="//qovex-v-dark.react.themesbrand.com" target="_blank">
+                <Link to="//bt-solution-v-dark.braintechsolution.com" target="_blank">
                   <img
                     src={layout2}
                     className="img-fluid img-thumbnail"
@@ -327,7 +327,7 @@ const RightSidebar = props => {
               </div>
 
               <div className="mb-2">
-                <Link to="//qovex-v-rtl.react.themesbrand.com" target="_blank">
+                <Link to="//bt-solution-v-rtl.braintechsolution.com" target="_blank">
                   <img
                     src={layout3}
                     className="img-fluid img-thumbnail"

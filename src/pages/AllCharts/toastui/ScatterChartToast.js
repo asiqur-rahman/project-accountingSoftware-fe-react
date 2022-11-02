@@ -45,7 +45,7 @@ const theme = {
     colors: ["#34c38f", "#556ee6"]
   }
 }
-TuiChart.registerTheme("qovexTheme", theme)
+TuiChart.registerTheme("bt-solutionTheme", theme)
 
 const ScatterChartToast = props => {
   const data = {

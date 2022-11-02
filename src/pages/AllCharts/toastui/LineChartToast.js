@@ -46,7 +46,7 @@ const theme = {
   }
 }
 
-TuiChart.registerTheme("qovexTheme", theme)
+TuiChart.registerTheme("bt-solutionTheme", theme)
 
 const LineChartToast = props => {
   const data = {

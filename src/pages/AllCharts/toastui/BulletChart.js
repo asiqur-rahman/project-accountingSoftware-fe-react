@@ -46,7 +46,7 @@ const theme = {
     ranges: [{ color: "#eee", opacity: 0.7 }, null, { color: "#556ee6" }]
   }
 }
-TuiChart.registerTheme("qovexTheme", theme)
+TuiChart.registerTheme("bt-solutionTheme", theme)
 
 const BulletChartToast = props => {
   const data = {
