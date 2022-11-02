@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as auth_helper from './session_helper';
 
-const baseURL = "http://localhost:3335/api";
+const baseURL = "http://localhost:3335/api/";
 
 
 let instance = axios.create({

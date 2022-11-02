@@ -48,9 +48,8 @@ const Login = (props) => {
       }
     })
     .catch(function (error) {
-      return setNotification(error)
-      
-    });
+      setNotification(error.message)
+    })
   }
 
   return (
