@@ -1,27 +1,34 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Row, Col, CardBody, Card, Progress } from "reactstrap"
-import { Link } from "react-router-dom"
 
 //Import Components
 import LineChart from "./line-chart"
-import RevenueChart from "./revenue-chart"
 import SalesAnalytics from "./sales-analytics"
-import ScatterChart from "./scatter-analytics"
 import LatestTransaction from "./latest-transaction"
 
-//Import Image
-import widgetImage from "../../assets/images/widget-img.png"
-import Overview from "./Overview";
-import Reviews from './Reviews';
-import Revenue from './Revenue';
-import Inbox  from './Inbox';
+import Axios from "../../helpers/axios_helper"
 
 const Dashboard = () => {
 
+  const [topData, setTopData] = useState(false);
+  const [last5transaction, setLast5transaction] = useState(false);
+  const [expenseAccountReview, setExpenseAccountReview] = useState(false);
+  const [dashboardApex, setDashboardApex] = useState(false);
+
+  useEffect(async () => {
+    await Axios.get("/dashboard/topData").then((response) => { 
+      setTopData(response.data[0]); });
+    await Axios.get("/dashboard/dashboardApex/7").then((response) => { 
+        setDashboardApex(response.data[0]); });
+    await Axios.get("/dashboard/expenseAccountReview").then((response) => { 
+      setExpenseAccountReview(response.data); });
+    await Axios.get("/dashboard/last5transaction").then((response) => { 
+        setLast5transaction(response.data.data); });
+  },[]);
+
   return (
-    <React.Fragment>
+    <>
       <div className="page-content">
-  
         <Row>
           <div className="col-12">
             <div className="page-title-box d-flex align-items-center justify-content-between">
@@ -51,7 +58,7 @@ const Dashboard = () => {
                     <div className="font-size-16 mt-2">Income Today</div>
                   </div>
                 </div>
-                <h4 className="mt-4">1,368 Tk.</h4> 
+                <h4 className="mt-4">{topData ? topData.IncomeToday : 0} Tk.</h4> 
               </CardBody>
             </Card>
           </Col>
@@ -68,7 +75,7 @@ const Dashboard = () => {
                     <div className="font-size-16 mt-2">Income This Month</div>
                   </div>
                 </div>
-                <h4 className="mt-4">1,368 Tk.</h4> 
+                <h4 className="mt-4">{topData ? topData.IncomeThisMonth : 0} Tk.</h4> 
               </CardBody>
             </Card>
           </Col>
@@ -85,7 +92,7 @@ const Dashboard = () => {
                     <div className="font-size-16 mt-2">Today Expense</div>
                   </div>
                 </div>
-                <h4 className="mt-4">1,368 Tk.</h4> 
+                <h4 className="mt-4">{topData ? topData.ExpenseToday : 0} Tk.</h4> 
               </CardBody>
             </Card>
           </Col>
@@ -102,21 +109,21 @@ const Dashboard = () => {
                     <div className="font-size-16 mt-2">Expense This Month</div>
                   </div>
                 </div>
-                <h4 className="mt-4">1,368 Tk.</h4> 
+                <h4 className="mt-4">{topData ? topData.ExpenseThisMonth : 0} Tk.</h4> 
               </CardBody>
             </Card>
           </Col>
           <Col lg={8}>
-            <LineChart />
+            <LineChart details={dashboardApex}/>
           </Col>
           <Col lg={4}>
-            <SalesAnalytics />
+            <SalesAnalytics details={expenseAccountReview}/>
           </Col>
-          <LatestTransaction />
+          <LatestTransaction transactions={last5transaction}/>
         </Row>
 
       </div>
-    </React.Fragment>
+    </>
   )
 }
 

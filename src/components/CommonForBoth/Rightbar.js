@@ -22,12 +22,10 @@ import "./rightbar.scss"
 
 //Import images
 import layout1 from "../../assets/images/layouts/layout-1.jpg"
-import layout2 from "../../assets/images/layouts/layout-2.jpg"
-import layout3 from "../../assets/images/layouts/layout-3.jpg"
 
 const RightSidebar = props => {
   return (
-    <React.Fragment>
+    <>
       <div className="right-bar">
         <SimpleBar style={{ height: "900px" }}>
           <div data-simplebar className="h-100">
@@ -173,7 +171,7 @@ const RightSidebar = props => {
               </div>
 
               {props.layoutType === "detached" ? (
-                <React.Fragment>
+                <>
                   <hr className="mt-1" />
                   <div className="radio-toolbar">
                     <span className="mb-2 d-block" id="radio-title">
@@ -274,7 +272,7 @@ const RightSidebar = props => {
                     <label htmlFor="leftsidebarThemecolored">Colored</label>
                   </div>
                   <hr className="mt-1" />
-                </React.Fragment>
+                </>
               ) : null}
 
               <hr className="mt-1" />
@@ -316,39 +314,12 @@ const RightSidebar = props => {
                 </Link>
               </div>
 
-              <div className="mb-2">
-                <Link to="//bt-solution-v-dark.braintechsolution.com" target="_blank">
-                  <img
-                    src={layout2}
-                    className="img-fluid img-thumbnail"
-                    alt=""
-                  />
-                </Link>
-              </div>
-
-              <div className="mb-2">
-                <Link to="//bt-solution-v-rtl.braintechsolution.com" target="_blank">
-                  <img
-                    src={layout3}
-                    className="img-fluid img-thumbnail"
-                    alt=""
-                  />
-                </Link>
-              </div>
-
-              <Link
-                to="#"
-                className="btn btn-primary btn-block mt-3"
-                target="_blank"
-              >
-                <i className="mdi mdi-cart mr-1" /> Purchase Now
-              </Link>
             </div>
           </div>
         </SimpleBar>
       </div>
       <div className="rightbar-overlay" />
-    </React.Fragment>
+    </>
   )
 }
 
