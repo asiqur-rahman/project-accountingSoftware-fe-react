@@ -44,29 +44,14 @@ const Dashboard = () => {
                 <div className="d-flex align-items-start">
                   <div className="avatar-sm font-size-20 me-3">
                     <span className="avatar-title bg-soft-primary text-primary rounded">
-                      <i className="mdi mdi-tag-plus-outline"></i>
+                      <i className="mdi mdi-archive-arrow-down-outline"></i>
                     </span>
                   </div>
                   <div className="flex-1">
-                    <div className="font-size-16 mt-2">New Orders</div>
+                    <div className="font-size-16 mt-2">Income Today</div>
                   </div>
                 </div>
-                <h4 className="mt-4">1,368</h4>
-                <div className="row">
-                  <div className="col-7">
-                    <p className="mb-0"><span className="text-success me-2"> 0.28% <i
-                      className="mdi mdi-arrow-up"></i> </span></p>
-                  </div>
-                  <div className="col-5 align-self-center">
-
-                    <Progress
-                      value="62"
-                      color="primary"
-                      className="bg-transparent progress-sm"
-                      size="sm"
-                    />
-                  </div>
-                </div>
+                <h4 className="mt-4">1,368 Tk.</h4> 
               </CardBody>
             </Card>
           </Col>
@@ -76,29 +61,14 @@ const Dashboard = () => {
                 <div className="d-flex align-items-start">
                   <div className="avatar-sm font-size-20 me-3">
                     <span className="avatar-title bg-soft-primary text-primary rounded">
-                      <i className="mdi mdi-tag-plus-outline"></i>
+                      <i className="mdi mdi-archive-arrow-down"></i>
                     </span>
                   </div>
                   <div className="flex-1">
-                    <div className="font-size-16 mt-2">New Orders</div>
+                    <div className="font-size-16 mt-2">Income This Month</div>
                   </div>
                 </div>
-                <h4 className="mt-4">1,368</h4>
-                <div className="row">
-                  <div className="col-7">
-                    <p className="mb-0"><span className="text-success me-2"> 0.28% <i
-                      className="mdi mdi-arrow-up"></i> </span></p>
-                  </div>
-                  <div className="col-5 align-self-center">
-
-                    <Progress
-                      value="62"
-                      color="primary"
-                      className="bg-transparent progress-sm"
-                      size="sm"
-                    />
-                  </div>
-                </div>
+                <h4 className="mt-4">1,368 Tk.</h4> 
               </CardBody>
             </Card>
           </Col>
@@ -108,29 +78,14 @@ const Dashboard = () => {
                 <div className="d-flex align-items-start">
                   <div className="avatar-sm font-size-20 me-3">
                     <span className="avatar-title bg-soft-primary text-primary rounded">
-                      <i className="mdi mdi-tag-plus-outline"></i>
+                      <i className="mdi mdi-archive-arrow-up-outline"></i>
                     </span>
                   </div>
                   <div className="flex-1">
-                    <div className="font-size-16 mt-2">New Orders</div>
+                    <div className="font-size-16 mt-2">Today Expense</div>
                   </div>
                 </div>
-                <h4 className="mt-4">1,368</h4>
-                <div className="row">
-                  <div className="col-7">
-                    <p className="mb-0"><span className="text-success me-2"> 0.28% <i
-                      className="mdi mdi-arrow-up"></i> </span></p>
-                  </div>
-                  <div className="col-5 align-self-center">
-
-                    <Progress
-                      value="62"
-                      color="primary"
-                      className="bg-transparent progress-sm"
-                      size="sm"
-                    />
-                  </div>
-                </div>
+                <h4 className="mt-4">1,368 Tk.</h4> 
               </CardBody>
             </Card>
           </Col>
@@ -140,29 +95,14 @@ const Dashboard = () => {
                 <div className="d-flex align-items-start">
                   <div className="avatar-sm font-size-20 me-3">
                     <span className="avatar-title bg-soft-primary text-primary rounded">
-                      <i className="mdi mdi-tag-plus-outline"></i>
+                      <i className="mdi mdi-archive-arrow-up"></i>
                     </span>
                   </div>
                   <div className="flex-1">
-                    <div className="font-size-16 mt-2">New Orders</div>
+                    <div className="font-size-16 mt-2">Expense This Month</div>
                   </div>
                 </div>
-                <h4 className="mt-4">1,368</h4>
-                <div className="row">
-                  <div className="col-7">
-                    <p className="mb-0"><span className="text-success me-2"> 0.28% <i
-                      className="mdi mdi-arrow-up"></i> </span></p>
-                  </div>
-                  <div className="col-5 align-self-center">
-
-                    <Progress
-                      value="62"
-                      color="primary"
-                      className="bg-transparent progress-sm"
-                      size="sm"
-                    />
-                  </div>
-                </div>
+                <h4 className="mt-4">1,368 Tk.</h4> 
               </CardBody>
             </Card>
           </Col>

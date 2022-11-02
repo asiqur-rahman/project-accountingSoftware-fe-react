@@ -3,7 +3,6 @@ import { Redirect } from "react-router-dom"
 
 // Dashboard
 import Dashboard from "../pages/Dashboard/index"
-import Dashboard2 from "../pages/Dashboard2.js/index.js"
 
 // Pages Calendar
 import Calendar from "../pages/Calendar/index"
@@ -108,7 +107,6 @@ import UserProfile from "../pages/Authentication/user-profile"
 
 const userRoutes = [
   { path: "/dashboard", component: Dashboard },
-  { path : '/dashboard2' , component : Dashboard2},
   { path: "/calendar", component: Calendar },
 
   //Email
