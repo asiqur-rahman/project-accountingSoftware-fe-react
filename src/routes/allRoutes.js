@@ -5,10 +5,20 @@ import { Redirect } from "react-router-dom"
 import Dashboard from "../pages/Dashboard/index"
 
 // Account
-import ChartOfAccountIndex from "../pages/Dashboard/index"
-import ChartOfAccountCreate from "../pages/Dashboard/index"
+import ChartOfAccountIndex from "../pages/ChartOfAccount/index"
+import ChartOfAccountCreate from "../pages/ChartOfAccount/create"
 import TransactionIndex from "../pages/Transaction/index"
 import TransactionCreate from "../pages/Transaction/create"
+
+// Cheque
+import BankAccountIndex from "../pages/BankAccount/index"
+import BankAccountCreate from "../pages/BankAccount/create"
+import ChequeIndex from "../pages/Cheque/index"
+import ChequeCreate from "../pages/Cheque/create"
+
+// User
+import UserIndex from "../pages/User/index"
+import UserCreate from "../pages/User/create"
 
 // Pages Calendar
 import Calendar from "../pages/Calendar/index"
@@ -118,6 +128,16 @@ const userRoutes = [
   //Account
   { path: "/transaction", component: TransactionCreate },
   { path: "/transaction-list", component: TransactionIndex },
+
+  //Cheque
+  { path: "/bank-account", component: BankAccountCreate },
+  { path: "/bank-account-list", component: BankAccountIndex },
+  { path: "/cheque", component: ChequeCreate },
+  { path: "/cheque-list", component: ChequeIndex },
+
+  //User
+  { path: "/user", component: UserCreate },
+  { path: "/user-list", component: UserIndex },
 
   //Email
   { path: "/email-inbox", component: EmailInbox },

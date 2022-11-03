@@ -104,10 +104,10 @@ const SidebarContent = props => {
               </Link>
               <ul className="sub-menu">
                 <li>
-                  <Link to="/email-inbox">{props.t("Inbox")}</Link>
+                  <Link to="/chart-of-account">{props.t("Chart of account")}</Link>
                 </li>
                 <li>
-                  <Link to="/email-read">{props.t("Read Email")} </Link>
+                  <Link to="/chart-of-account-list">{props.t("List of Chart of account")} </Link>
                 </li>
               </ul>
             </li>
@@ -128,6 +128,75 @@ const SidebarContent = props => {
             </li>
 
             <li className="menu-title">{props.t("Cheque")}</li>
+
+            <li>
+              <Link to="/#" className="has-arrow waves-effect">
+                <i className="mdi mdi-inbox-full"></i>
+                <span>{props.t("Bank Account")}</span>
+              </Link>
+              <ul className="sub-menu">
+                <li>
+                  <Link to="/bank-account">{props.t("New Bank Account")}</Link>
+                </li>
+                <li>
+                  <Link to="/bank-account-list">{props.t("List of Bank Account")} </Link>
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <Link to="/#" className="has-arrow waves-effect">
+                <i className="mdi mdi-inbox-full"></i>
+                <span>{props.t("Cheque Record")}</span>
+              </Link>
+              <ul className="sub-menu">
+                <li>
+                  <Link to="/cheque">{props.t("New Cheque Record")}</Link>
+                </li>
+                <li>
+                  <Link to="/cheque-list">{props.t("List of Cheque Record")} </Link>
+                </li>
+              </ul>
+            </li>
+            
+            <li className="menu-title">{props.t("Report")}</li>
+
+            <li>
+              <Link to="/#" className="has-arrow waves-effect">
+                <i className="mdi mdi-inbox-full"></i>
+                <span>{props.t("Report")}</span>
+              </Link>
+              <ul className="sub-menu">
+                <li>
+                  <Link to="/income-statement">{props.t("Income Statement")}</Link>
+                </li>
+                <li>
+                  <Link to="/balance-sheet">{props.t("Balance Sheet")} </Link>
+                </li>
+                <li>
+                  <Link to="/filter-record">{props.t("Filter Record")} </Link>
+                </li>
+              </ul>
+            </li>
+
+            <li className="menu-title">{props.t("User")}</li>
+
+            <li>
+              <Link to="/#" className="has-arrow waves-effect">
+                <i className="mdi mdi-account-circle-outline"></i>
+                <span>{props.t("User")}</span>
+              </Link>
+              <ul className="sub-menu">
+                <li>
+                  <Link to="/user">{props.t("New User")}</Link>
+                </li>
+                <li>
+                  <Link to="/user-list">{props.t("List of User")} </Link>
+                </li>
+              </ul>
+            </li>
+
+            <li className="menu-title">{props.t("Other")}</li>
 
             <li>
               <Link to="/calendar" className=" waves-effect">

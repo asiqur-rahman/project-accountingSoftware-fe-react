@@ -46,38 +46,6 @@ const RightSidebar = props => {
             <hr className="my-0" />
 
             <div className="p-4">
-              <div className="radio-toolbar">
-                <span className="mb-2 d-block">Layouts</span>
-                <input
-                  type="radio"
-                  id="radioVertical"
-                  name="radioFruit"
-                  value="detached"
-                  checked={props.layoutType === "detached"}
-                  onChange={e => {
-                    if (e.target.checked) {
-                      props.changeLayout(e.target.value)
-                    }
-                  }}
-                />
-                <label htmlFor="radioVertical">Vertical</label>
-                {" "}
-                <input
-                  type="radio"
-                  id="radioHorizontal"
-                  name="radioFruit"
-                  value="horizontal"
-                  checked={props.layoutType === "horizontal"}
-                  onChange={e => {
-                    if (e.target.checked) {
-                      props.changeLayout(e.target.value)
-                    }
-                  }}
-                />
-                <label htmlFor="radioHorizontal">Horizontal</label>
-              </div>
-
-              <hr className="mt-1" />
 
               <div className="radio-toolbar">
                 <span className="mb-2 d-block" id="radio-title">
@@ -275,8 +243,6 @@ const RightSidebar = props => {
                 </>
               ) : null}
 
-              <hr className="mt-1" />
-
               <FormGroup>
                 <span className="mb-2 d-block" id="radio-title">
                   Preloader
@@ -298,21 +264,6 @@ const RightSidebar = props => {
                   </label>
                 </div>
               </FormGroup>
-
-              <h6 className="text-center">Choose Layouts</h6>
-
-              <div className="mb-2">
-                <Link
-                  to="//bt-solution-v-light.braintechsolution.com"
-                  target="_blank"
-                >
-                  <img
-                    src={layout1}
-                    className="img-fluid img-thumbnail"
-                    alt=""
-                  />
-                </Link>
-              </div>
 
             </div>
           </div>

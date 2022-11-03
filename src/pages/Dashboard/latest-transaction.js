@@ -30,7 +30,7 @@ const LatestTransaction = ( props ) => {
                             <tbody>
                                 {last5transaction && last5transaction.map((item, i) =>{
                                     return (
-                                        <tr>
+                                        <tr key={i}>
                                             <td>{item.sl}</td>
                                             <td>{item.dateTime}</td>
                                             <td>{item.transactionNo}</td>
