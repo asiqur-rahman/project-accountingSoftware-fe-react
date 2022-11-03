@@ -74,8 +74,11 @@ const DatatableTables = () => {
         tabledata.rows=response.data.data;
         setListData(tabledata);
       }
+      else{
+        setListData(tabledata)
+      }
     }).catch(e=>{
-      setListData([])
+      setListData(tabledata)
     });
   },[]);
 
