@@ -10,7 +10,6 @@ import { showRightSidebarAction, toggleLeftmenu } from "../../store/actions"
 
 // Import menuDropdown
 import LanguageDropdown from "../CommonForBoth/TopbarDropdown/LanguageDropdown"
-import NotificationDropdown from "../CommonForBoth/TopbarDropdown/NotificationDropdown"
 import ProfileMenu from "../CommonForBoth/TopbarDropdown/ProfileMenu"
 
 import logo from "../../assets/images/logo-sm.png"
@@ -142,8 +141,6 @@ const Header = props => {
               <i className="mdi mdi-fullscreen"></i>
             </button>
           </div>
-
-          <NotificationDropdown />
 
           <ProfileMenu />
 

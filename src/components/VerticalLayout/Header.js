@@ -11,7 +11,6 @@ import { Dropdown, DropdownToggle, DropdownMenu } from "reactstrap";
 
 // Import menuDropdown
 import LanguageDropdown from "../CommonForBoth/TopbarDropdown/LanguageDropdown";
-import NotificationDropdown from "../CommonForBoth/TopbarDropdown/NotificationDropdown";
 import ProfileMenu from "../CommonForBoth/TopbarDropdown/ProfileMenu";
 
 import logoSm from "../../assets/images/logo-sm.png";
@@ -123,7 +122,7 @@ const Header = (props) => {
                   <i className="mdi mdi-fullscreen"></i>
                 </button>
               </Dropdown>{" "}
-              <NotificationDropdown /> <ProfileMenu />{" "}
+              <ProfileMenu />{" "}
               <button
                 type="button"
                 className="btn header-item noti-icon right-bar-toggle waves-effect"

@@ -27,7 +27,9 @@ export const getUser = () => {
     const user = localStorage.getItem(sessionName);
     if(user){
         const data=decrypt(localStorage.getItem(sessionName));
-        return JSON.parse(data);
+        const parsedData=JSON.parse(data);
+        const parsedDetails=JSON.parse(parsedData.details);
+        return parsedDetails;
     }
     else{
         removeSession();
