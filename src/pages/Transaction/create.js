@@ -9,10 +9,16 @@ import {
   Button,
   CardTitle,
   CardSubtitle,
+  InputGroup,
   Label,
   Input
 } from "reactstrap"
 import { AvForm, AvField } from "availity-reactstrap-validation"
+
+//Import Flatepicker
+import "flatpickr/dist/themes/material_blue.css";
+import Flatpickr from "react-flatpickr";
+import Select from "react-select";
 
 //Import Breadcrumb
 import Breadcrumbs from "../../components/Common/Breadcrumb"
@@ -31,6 +37,10 @@ const FormValidations = () => {
         setrows2([...rows2, item2])
     }
 
+    const handleSubmit = (event, errors, values) => {
+      var abc=values;
+    }
+
   return (
     <>
       <div className="page-content">
@@ -39,19 +49,13 @@ const FormValidations = () => {
             <Col xl="12">
               <Card>
                 <CardBody>
-                  <AvForm className="needs-validation">
+                  <AvForm className="needs-validation" onSubmit={handleSubmit}>
                     <Row>
                       <Col md="4">
                         <div className="mb-3">
                           <Label htmlFor="validationCustom01">Transaction type</Label>
-                          <AvField
-                            name="firstname"
-                            placeholder="First name"
-                            type="text"
-                            errorMessage="Enter First Name"
-                            className="form-control"
-                            validate={{ required: { value: true } }}
-                            id="validationCustom01"
+                          <Select
+                            options={[{ label: "Tent", value: "Tent" }]}
                           />
                         </div>
                       </Col>
@@ -59,7 +63,7 @@ const FormValidations = () => {
                         <div className="mb-3">
                           <Label htmlFor="validationCustom02">Accounting Head</Label>
                           <AvField
-                            name="lastname"
+                            name="accountingHead"
                             placeholder="Last name"
                             type="text"
                             errorMessage="Enter Last name"
@@ -86,25 +90,27 @@ const FormValidations = () => {
                       <Col md="4">
                         <div className="mb-3">
                           <Label htmlFor="validationCustom04">Date</Label>
-                          <AvField
-                            name="state"
-                            placeholder="State"
-                            type="text"
-                            errorMessage="Please provide a valid state."
-                            className="form-control"
-                            validate={{ required: { value: true } }}
-                            id="validationCustom04"
-                          />
+                            <Flatpickr
+                              className="form-control d-block"
+                              placeholder="dd M, yyyy"
+                              options={{
+                                altInput: true,
+                                altFormat: "F j, Y",
+                                dateFormat: "Y-m-d",
+                                defaultDate: "today"
+                              }}
+                              id="validationCustom04"
+                            />
                         </div>
                       </Col>
                       <Col md="4">
                         <div className="mb-3">
                           <Label htmlFor="validationCustom05">Amount</Label>
                           <AvField
-                            name="zip"
-                            placeholder="Zip Code"
-                            type="text"
-                            errorMessage=" Please provide a valid zip."
+                            name="amount"
+                            placeholder="0"
+                            type="number"
+                            errorMessage=" Please provide transaction amount."
                             className="form-control"
                             validate={{ required: { value: true } }}
                             id="validationCustom05"
@@ -116,7 +122,7 @@ const FormValidations = () => {
                           <Label htmlFor="validationCustom05">Description</Label>
                           <AvField
                             name="zip"
-                            placeholder="Zip Code"
+                            placeholder=" "
                             type="text"
                             errorMessage=" Please provide a valid zip."
                             className="form-control"
@@ -129,22 +135,22 @@ const FormValidations = () => {
                     <hr/>
                     <Row>
                         <Col xs={12}>
-                            <Form className="repeater" encType="multipart/form-data">
+                            <div className="repeater">
                             <div data-repeater-list="group-a">
                                 <div data-repeater-item className="row">
                                     <div className="mb-3 col-lg-5">
                                         <label htmlFor="name">Account</label>
-                                        <input type="text" id="name" name="untyped-input" className="form-control" />
+                                        <input type="text" name="accountType" className="form-control" />
                                     </div>
 
                                     <div className="mb-3 col-lg-3">
                                         <label htmlFor="email">Debit</label>
-                                        <input type="number" id="email" className="form-control" />
+                                        <input type="number" name="debitAmount" className="form-control" />
                                     </div>
 
                                     <div className="mb-3 col-lg-3">
                                         <label htmlFor="subject">Credit</label>
-                                        <input type="number" id="subject" className="form-control" />
+                                        <input type="number" name="creditAmount" className="form-control" />
                                     </div>
 
                                     {/* <div className="mb-3 col-lg-2">
@@ -169,17 +175,17 @@ const FormValidations = () => {
                                     <div data-repeater-item className="row">
                                         <div className="mb-3 col-lg-5">
                                             <label htmlFor="name">Account</label>
-                                            <input type="text" id="name" name="untyped-input" className="form-control" />
+                                            <input type="text" name="accountType" className="form-control" />
                                         </div>
 
                                         <div className="mb-3 col-lg-3">
                                             <label htmlFor="email">Debit</label>
-                                            <input type="number" id="email" className="form-control" />
+                                            <input type="number" name="debitAmount" className="form-control" />
                                         </div>
 
                                         <div className="mb-3 col-lg-3">
                                             <label htmlFor="subject">Credit</label>
-                                            <input type="tenumberxt" id="subject" className="form-control" />
+                                            <input type="number" name="creditAmount" className="form-control" />
                                         </div>
 
                                         <Col lg={1} className="align-self-center mt-2">
@@ -205,7 +211,7 @@ const FormValidations = () => {
                                 className="btn btn-success mt-3 mt-lg-0"
                                 >Add Split
                             </Button>
-                            </Form>
+                            </div>
                         </Col>
                     </Row>
                     <Col style={{textAlign: 'right'}}>
