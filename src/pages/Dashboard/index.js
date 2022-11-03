@@ -119,7 +119,9 @@ const Dashboard = () => {
           <Col lg={4}>
             <SalesAnalytics details={expenseAccountReview}/>
           </Col>
-          <LatestTransaction transactions={last5transaction}/>
+          <Col lg={12}>
+            <LatestTransaction transactions={last5transaction}/>
+          </Col>
         </Row>
 
       </div>

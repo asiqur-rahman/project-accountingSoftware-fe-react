@@ -2,28 +2,27 @@ import React, { useEffect, useState } from "react"
 import { Row, Col, Card, CardBody } from "reactstrap"
 import ReactApexChart from "react-apexcharts"
 
-const SalesAnalysis = ( props ) => {
+const ExpenseAnalysis = ( props ) => {
 
   const [analysis, setAnalysis] = useState(false);
 
     useEffect(async () => {
-        // if(props.transactions)setLast5transaction(props.transactions)
         if(props.details){
           setAnalysis({
-            series: [38, 26, 14],
+            series: props.details.value,//[38, 26, 14],
             options: {
-              labels: ["Online", "Offline", "Marketing"],
+              labels: props.details.key,//["Online", "Offline", "Marketing"],
               plotOptions: {
                 pie: {
                   donut: {
-                    size: '75%'
+                    size: '70%'
                   }
                 }
               },
               legend: {
                 show: false,
               },
-              colors: ['#3b5de7', '#45cb85', '#eeb902'],
+              // colors: ['#3b5de7', '#45cb85', '#eeb902'],
             },
           })
         }
@@ -33,7 +32,7 @@ const SalesAnalysis = ( props ) => {
       <>
         <Card>
           <CardBody>
-            <h4 className="card-title mb-4">Sales Analytics</h4>
+            <h4 className="card-title mb-4">Expense Review</h4>
 
             <Row className="align-items-center">
               <Col sm={12}>
@@ -54,4 +53,4 @@ const SalesAnalysis = ( props ) => {
     )
 }
 
-export default SalesAnalysis
+export default ExpenseAnalysis

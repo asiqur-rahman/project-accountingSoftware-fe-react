@@ -95,6 +95,40 @@ const SidebarContent = props => {
               </Link>
             </li>
 
+            <li className="menu-title">{props.t("Account")}</li>
+
+            <li>
+              <Link to="/#" className="has-arrow waves-effect">
+                <i className="mdi mdi-inbox-full"></i>
+                <span>{props.t("Chart of Account")}</span>
+              </Link>
+              <ul className="sub-menu">
+                <li>
+                  <Link to="/email-inbox">{props.t("Inbox")}</Link>
+                </li>
+                <li>
+                  <Link to="/email-read">{props.t("Read Email")} </Link>
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <Link to="/#" className="has-arrow waves-effect">
+                <i className="mdi mdi-inbox-full"></i>
+                <span>{props.t("Transaction")}</span>
+              </Link>
+              <ul className="sub-menu">
+                <li>
+                  <Link to="/transaction">{props.t("New transaction")}</Link>
+                </li>
+                <li>
+                  <Link to="/transaction-list">{props.t("List of Transactions")} </Link>
+                </li>
+              </ul>
+            </li>
+
+            <li className="menu-title">{props.t("Cheque")}</li>
+
             <li>
               <Link to="/calendar" className=" waves-effect">
                 <i className="mdi mdi-calendar-text"></i>

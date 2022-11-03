@@ -24,7 +24,7 @@ const LatestTransaction = ( props ) => {
                                     <th scope="col">Transaction No</th>
                                     <th scope="col">Description</th>
                                     <th scope="col">Amount</th>
-                                    <th scope="col" colSpan="2">Payment Status</th>
+                                    <th scope="col" colSpan="2">Action</th>
                                 </tr>
                             </thead>
                             <tbody>

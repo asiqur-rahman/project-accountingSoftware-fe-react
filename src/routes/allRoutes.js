@@ -4,6 +4,12 @@ import { Redirect } from "react-router-dom"
 // Dashboard
 import Dashboard from "../pages/Dashboard/index"
 
+// Account
+import ChartOfAccountIndex from "../pages/Dashboard/index"
+import ChartOfAccountCreate from "../pages/Dashboard/index"
+import TransactionIndex from "../pages/Transaction/index"
+import TransactionCreate from "../pages/Transaction/create"
+
 // Pages Calendar
 import Calendar from "../pages/Calendar/index"
 
@@ -108,6 +114,10 @@ import UserProfile from "../pages/Authentication/user-profile"
 const userRoutes = [
   { path: "/dashboard", component: Dashboard },
   { path: "/calendar", component: Calendar },
+
+  //Account
+  { path: "/transaction", component: TransactionCreate },
+  { path: "/transaction-list", component: TransactionIndex },
 
   //Email
   { path: "/email-inbox", component: EmailInbox },

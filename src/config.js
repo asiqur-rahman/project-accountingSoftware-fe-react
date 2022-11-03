@@ -1,10 +1,7 @@
 module.exports = {
-  google: {
-    API_KEY: "",
-    CLIENT_ID: "",
-    SECRET: "",
-  },
-  facebook: {
-    APP_ID: "",
-  },
+  applicationInfo:{
+    appName: "e-Accounting360",
+    devOrgName: "DataCo Systems Limited",
+    devOrgLink: "https://datacosys.com"
+  }
 }

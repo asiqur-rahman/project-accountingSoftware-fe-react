@@ -19,6 +19,7 @@ import bim from "../../assets/images/acPro/bim.png"
 import giz from "../../assets/images/acPro/giz.jpg"
 import eAcPro from "../../assets/images/acPro/eAcPro.png"
 
+import Config from "../../config"
 import Axios from "../../helpers/axios_helper"
 import * as Session from "../../helpers/session_helper"
 import { useHistory } from "react-router-dom";
@@ -150,8 +151,9 @@ const Login = (props) => {
               <div className="mt-5 text-center">
                 {/* <p>Don't have an account ? <Link to="/register"
                   className="fw-medium text-primary"> Signup now </Link> </p> */}
-                <p>© {new Date().getFullYear()} e-Accounting360 <br/> Developed & Maintained by <a href="https://datacosys.com" target="_blank"><span style={{color: "#fd7014"}}>DataCo Systems Limited.</span></a>.
-                        </p>
+                <p>
+                  © {new Date().getFullYear()} e-Accounting360 <br/> Design & Develop by <a href={Config.applicationInfo.devOrgLink} target="_blank"><span style={{color: "#fd7014"}}>{Config.applicationInfo.devOrgName}</span></a>
+                </p>
               </div>
             </Col>
           </Row>
