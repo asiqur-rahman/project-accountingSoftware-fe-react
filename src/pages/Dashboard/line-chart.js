@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import ReactApexChart from "react-apexcharts"
 import {
+    Input,
     Card,
     CardBody,
   } from "reactstrap"
@@ -65,6 +66,15 @@ const LineChart = (props) => {
         <React.Fragment>
             <Card>
                 <CardBody>
+                    <div className="float-end">
+                        <div className="input-group">
+                            <label className="input-group-text">Sort By</label>
+                            <Input type="select" className="form-select form-select-sm">
+                                <option value="7">7 Days</option>
+                                <option value="30">30 Days</option>
+                            </Input>
+                        </div>
+                    </div>
                     <h4 className="card-title mb-4">Expense Report</h4>
                     {details && 
                         <ReactApexChart
