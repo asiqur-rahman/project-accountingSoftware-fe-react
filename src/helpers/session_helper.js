@@ -1,10 +1,10 @@
 const CryptoJS = require("crypto-js");
 
-const sessionName='NeverTryToHack';
+const sessionName='eAccounting-Pro';
 
 export const isLogedIn = () => {
     const user = localStorage.getItem(sessionName);
-    if(user){
+    if(user && user!='null'){
         const data=decrypt(localStorage.getItem(sessionName));
         const session=JSON.parse(data);
         const SessionTime=new Date(session['sessionTime']).toLocaleTimeString();
@@ -45,13 +45,13 @@ export const getToken= () => {
          //const rrr=SessionTime>LocalTime;
          //alert(SessionTime + ' - '+ LocalTime + ' - '+ rrr);
          //return session.token;
-        if(SessionTime>LocalTime){
+        // if(SessionTime>LocalTime){
             return session.token;
-        }
-        else{
-            removeSession();
-            return null;
-        }
+        // }
+        // else{
+        //     removeSession();
+        //     return null;
+        // }
     }
     else{
         removeSession();
@@ -63,7 +63,9 @@ export const setSession= async (sessionData) => {
     var sessionValidate = new Date();
     sessionValidate.setTime(new Date().getTime() + (sessionData.sessionTime*1000));
     sessionData.sessionTime = sessionValidate;
-    localStorage.setItem(sessionName,encrypt(JSON.stringify(sessionData)));
+    const string = JSON.stringify(sessionData);
+    const encrypted = encrypt(string);
+    localStorage.setItem(sessionName,encrypted);
 }
 
 export const removeSession= async () => {
