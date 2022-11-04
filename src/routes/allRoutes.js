@@ -133,6 +133,7 @@ const userRoutes = [
   { path: "/bank-account", component: BankAccountCreate },
   { path: "/bank-account-list", component: BankAccountIndex },
   { path: "/cheque", component: ChequeCreate },
+  { path: "/cheque/:id", component: ChequeCreate },
   { path: "/cheque-list", component: ChequeIndex },
 
   //User

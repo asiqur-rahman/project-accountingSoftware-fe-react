@@ -74,7 +74,7 @@ const DatatableTables = () => {
       if(response.data.status===200){
         response.data.data.map((item, index) => {
           item.action = (
-            <Link to={`/cheque?id=${item.id}`} style={{ display: "flex", justifyContent: "space-between" }}>
+            <Link to={`/cheque/${item.id}`} style={{ display: "flex", justifyContent: "space-between" }}>
               <div
                 className="uil-trash-alt btn-primary"
                 style={{
