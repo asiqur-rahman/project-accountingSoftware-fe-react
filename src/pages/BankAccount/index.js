@@ -44,12 +44,12 @@ const DatatableTables = () => {
         sort: "asc",
         width: 270,
       },
-      {
-        label: "Action",
-        field: "action",
-        sort: "asc",
-        width: 100,
-      }
+      // {
+      //   label: "Action",
+      //   field: "action",
+      //   sort: "asc",
+      //   width: 100,
+      // }
     ],
     rows:[]
   };
@@ -59,26 +59,26 @@ const DatatableTables = () => {
     .then((response) => { 
       if(response.data.status===200){
         let userData = [];
-        response.data.data.map((item, index) => {
-          item.action = (
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <div
-                className="uil-trash-alt btn-primary"
-                style={{
-                  cursor: "pointer",
-                  color: "white",
-                  fontSize: ".7em",
-                  padding: ".5rem",
-                  borderRadius: ".3rem"
-                }}
-                onClick={() => alert(item.id)}
-              >
-                Details
-              </div>
-            </div>
-          );
-          userData.push(item);
-        });
+        // response.data.data.map((item, index) => {
+        //   item.action = (
+        //     <div style={{ display: "flex", justifyContent: "space-between" }}>
+        //       <div
+        //         className="uil-trash-alt btn-primary"
+        //         style={{
+        //           cursor: "pointer",
+        //           color: "white",
+        //           fontSize: ".7em",
+        //           padding: ".5rem",
+        //           borderRadius: ".3rem"
+        //         }}
+        //         onClick={() => alert(item.id)}
+        //       >
+        //         Details
+        //       </div>
+        //     </div>
+        //   );
+        //   userData.push(item);
+        // });
         tabledata.rows=response.data.data;
         setListData(tabledata);
       }

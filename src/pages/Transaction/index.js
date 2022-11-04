@@ -52,7 +52,6 @@ const DatatableTables = () => {
     await Axios.get("/transaction/list")
     .then((response) => { 
       if(response.data.status===200){
-        let userData = [];
         response.data.data.map((item, index) => {
           item.action = (
             <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -71,7 +70,6 @@ const DatatableTables = () => {
               </div>
             </div>
           );
-          userData.push(item);
         });
         tabledata.rows=response.data.data;
         setListData(tabledata);

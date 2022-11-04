@@ -5,111 +5,81 @@ import {
   Col,
   Card,
   CardBody,
-  Form,
   Button,
-  CardTitle,
-  CardSubtitle,
-  InputGroup,
-  Label,
-  Input
+  Label
 } from "reactstrap"
 import { AvForm, AvField } from "availity-reactstrap-validation"
 
-//Import Flatepicker
-import "flatpickr/dist/themes/material_blue.css";
-import Flatpickr from "react-flatpickr";
-import Select from "react-select";
+import Axios from "../../helpers/axios_helper"
+import { useNavigate } from "react-router-dom"
 
 //Import Breadcrumb
 import Breadcrumbs from "../../components/Common/Breadcrumb"
 
-const FormValidations = () => {
+const BankAccount = (props) => {
+  const navigate  = useNavigate ();
 
-    const [rows2, setrows2] = useState([])
+  const handleSubmit = async (event, errors, values) => {
+    var abc=values;
+    await Axios.post("/bank-account",values)
+    .then((response) => {
+      if(response.data.status===201){
+        navigate("/bank-account-list");
+      }else{
 
-    function handleRemoveRow(e, id) {
-        if (typeof id != "undefined")
-            document.getElementById("addr" + id).style.display = "none"
-    }
-
-    function handleAddRowNested1() {
-        const item2 = { name1: "" }
-        setrows2([...rows2, item2])
-    }
-
-    const handleSubmit = (event, errors, values) => {
-      var abc=values;
-    }
+      }
+      var response=response;
+    })
+    .catch((e)=>{
+      var e=e;
+    })
+  }
 
   return (
     <>
       <div className="page-content">
-          <Breadcrumbs title="Transaction" breadcrumbItem="New Transaction" />
+          <Breadcrumbs title="Bank Account" breadcrumbItem="New Bank Account" />
           <Row>
             <Col xl="12">
               <Card>
                 <CardBody>
                   <AvForm className="needs-validation" onSubmit={handleSubmit}>
                     <Row>
-                      <Col md="4">
+                      <Col md="6">
                         <div className="mb-3">
-                          <Label htmlFor="validationCustom01">Transaction type</Label>
-                          <Select
-                            options={[{ label: "Tent", value: "Tent" }]}
-                          />
-                        </div>
-                      </Col>
-                      <Col md="4">
-                        <div className="mb-3">
-                          <Label htmlFor="validationCustom02">Accounting Head</Label>
+                          <Label htmlFor="validationCustom02">Bank Name</Label>
                           <AvField
-                            name="accountingHead"
-                            placeholder="Last name"
+                            name="name"
+                            placeholder="Bank Name"
                             type="text"
-                            errorMessage="Enter Last name"
+                            errorMessage="Please provide bank name"
                             className="form-control"
                             validate={{ required: { value: true } }}
                             id="validationCustom02"
                           />
                         </div>
                       </Col>
-                      <Col md="4">
+                      <Col md="6">
                         <div className="mb-3">
-                          <Label htmlFor="validationCustom03">How did you pay</Label>
+                          <Label htmlFor="validationCustom03">Account Title</Label>
                           <AvField
-                            name="city"
-                            placeholder="City"
+                            name="accountTitle"
+                            placeholder="Account Title"
                             type="text"
-                            errorMessage=" Please provide a valid city."
+                            errorMessage=" Please provide account title."
                             className="form-control"
                             validate={{ required: { value: true } }}
                             id="validationCustom03"
                           />
                         </div>
                       </Col>
-                      <Col md="4">
+                      <Col md="6">
                         <div className="mb-3">
-                          <Label htmlFor="validationCustom04">Date</Label>
-                            <Flatpickr
-                              className="form-control d-block"
-                              placeholder="dd M, yyyy"
-                              options={{
-                                altInput: true,
-                                altFormat: "F j, Y",
-                                dateFormat: "Y-m-d",
-                                defaultDate: "today"
-                              }}
-                              id="validationCustom04"
-                            />
-                        </div>
-                      </Col>
-                      <Col md="4">
-                        <div className="mb-3">
-                          <Label htmlFor="validationCustom05">Amount</Label>
+                          <Label htmlFor="validationCustom05">Account Number</Label>
                           <AvField
-                            name="amount"
-                            placeholder="0"
-                            type="number"
+                            name="accountNumber"
+                            placeholder="Account Number"
+                            type="text"
                             errorMessage=" Please provide transaction amount."
                             className="form-control"
                             validate={{ required: { value: true } }}
@@ -117,102 +87,18 @@ const FormValidations = () => {
                           />
                         </div>
                       </Col>
-                      <Col md="4">
+                      <Col md="6">
                         <div className="mb-3">
                           <Label htmlFor="validationCustom05">Description</Label>
                           <AvField
-                            name="zip"
-                            placeholder=" "
+                            name="description"
+                            placeholder="Description"
                             type="text"
-                            errorMessage=" Please provide a valid zip."
                             className="form-control"
-                            validate={{ required: { value: true } }}
                             id="validationCustom05"
                           />
                         </div>
                       </Col>
-                    </Row>
-                    <hr/>
-                    <Row>
-                        <Col xs={12}>
-                            <div className="repeater">
-                            <div data-repeater-list="group-a">
-                                <div data-repeater-item className="row">
-                                    <div className="mb-3 col-lg-5">
-                                        <label htmlFor="name">Account</label>
-                                        <input type="text" name="accountType" className="form-control" />
-                                    </div>
-
-                                    <div className="mb-3 col-lg-3">
-                                        <label htmlFor="email">Debit</label>
-                                        <input type="number" name="debitAmount" className="form-control" />
-                                    </div>
-
-                                    <div className="mb-3 col-lg-3">
-                                        <label htmlFor="subject">Credit</label>
-                                        <input type="number" name="creditAmount" className="form-control" />
-                                    </div>
-
-                                    {/* <div className="mb-3 col-lg-2">
-                                        <label htmlFor="message">Message</label>
-                                        <textarea id="message" className="form-control"></textarea>
-                                    </div> */}
-
-                                    <Col lg={1} className="align-self-center mt-2">
-                                        <button
-                                            data-repeater-delete
-                                            type="button"
-                                            className="btn btn-danger waves-effect waves-light">
-                                                <i className="bx bx-trash font-size-20 align-middle"></i>
-                                        </button>
-                                    </Col>
-                                </div>
-
-                            </div>
-                            {rows2.map((item2, idx) => (
-                                <React.Fragment key={idx}>
-                                <div data-repeater-list="group-a" id={"addr" + idx} >
-                                    <div data-repeater-item className="row">
-                                        <div className="mb-3 col-lg-5">
-                                            <label htmlFor="name">Account</label>
-                                            <input type="text" name="accountType" className="form-control" />
-                                        </div>
-
-                                        <div className="mb-3 col-lg-3">
-                                            <label htmlFor="email">Debit</label>
-                                            <input type="number" name="debitAmount" className="form-control" />
-                                        </div>
-
-                                        <div className="mb-3 col-lg-3">
-                                            <label htmlFor="subject">Credit</label>
-                                            <input type="number" name="creditAmount" className="form-control" />
-                                        </div>
-
-                                        <Col lg={1} className="align-self-center mt-2">
-                                            <button
-                                                data-repeater-delete
-                                                type="button"
-                                                className="btn btn-danger waves-effect waves-light"
-                                                onClick={e => {
-                                                    handleRemoveRow(e , idx)
-                                                }}><i className="bx bx-trash font-size-20 align-middle"></i>
-                                            </button>
-                                        </Col>
-                                    </div>
-
-                                </div>
-                                </React.Fragment>
-                            ))}
-                            <Button
-                                onClick={() => {
-                                    handleAddRowNested1()
-                                }}
-                                color="success"
-                                className="btn btn-success mt-3 mt-lg-0"
-                                >Add Split
-                            </Button>
-                            </div>
-                        </Col>
                     </Row>
                     <Col style={{textAlign: 'right'}}>
                     <Button color="primary" type="submit">
@@ -231,4 +117,4 @@ const FormValidations = () => {
   )
 }
 
-export default FormValidations
+export default BankAccount
