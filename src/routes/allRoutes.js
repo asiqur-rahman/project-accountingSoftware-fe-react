@@ -219,8 +219,8 @@ const userRoutes = [
   { path: "/maps-vector", component: MapsVector },
   { path: "/maps-leaflet", component: MapsLeaflet },
 
-    // //profile
-    { path: "/profile", component: UserProfile },
+  // //profile
+  { path: "/profile", component: UserProfile },
 
   // this route should be at the end of all other routes
   { path: "/", exact: true, component: () => <Redirect to="/dashboard" /> },

@@ -22,8 +22,6 @@ const ProfileMenu = props => {
   // Declare a new state variable, which we'll call "menu"
   const [menu, setMenu] = useState(false)
 
-  const [username, setusername] = useState("Admin")
-
   return (
     <>
       <Dropdown
@@ -36,11 +34,11 @@ const ProfileMenu = props => {
           id="page-header-user-dropdown"
           tag="button"
         >
-          <img
+          {/* <img
             className="rounded-circle header-profile-user"
             src={user4}
             alt="Header Avatar"
-          />{" "}
+          />{" "} */}
           <span className="d-none d-xl-inline-block ms-1">{Session.getUser().role_name + " Settings"}</span>{" "}
           <i className="mdi mdi-chevron-down d-none d-xl-inline-block"></i>{" "}
         </DropdownToggle>
