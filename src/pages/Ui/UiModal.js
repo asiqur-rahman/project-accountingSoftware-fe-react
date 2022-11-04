@@ -407,6 +407,7 @@ const UiModal = () => {
                           </button>
                     </div>
                     <Modal
+                      size="lg"
                       isOpen={modal_center}
                       toggle={() => {
                         tog_center()
