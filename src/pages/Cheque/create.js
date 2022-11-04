@@ -16,16 +16,15 @@ import Flatpickr from "react-flatpickr"
 import Select from "react-select"
 
 import Axios from "../../helpers/axios_helper"
-import { useNavigate,useParams,useSearchParams } from "react-router-dom"
+import { useHistory,useParams } from "react-router-dom"
 // import { useParams } from "react-router"
 
 //Import Breadcrumb
 import Breadcrumbs from "../../components/Common/Breadcrumb"
 
 const ChequeRecord = () => {
-  const navigate  = useNavigate ();
+  const history = useHistory();
   const params = useParams();
-  const [searchParams, setSearchParams] = useSearchParams();
   const [bankAccounts, setbankAccounts] = useState([])
   const [bankAccountId, setBankAccountId] = useState(0)
   const [dateTime, setDateTime] = useState()
@@ -37,7 +36,7 @@ const ChequeRecord = () => {
     await Axios.post("/cheque",values)
     .then((response) => {
       if(response.data.status===201){
-        navigate("/cheque-list");
+        history.push("/cheque-list");
       }else{
         alert(response.data.message)
       }

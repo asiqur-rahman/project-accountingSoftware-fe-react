@@ -11,20 +11,20 @@ import {
 import { AvForm, AvField } from "availity-reactstrap-validation"
 
 import Axios from "../../helpers/axios_helper"
-import { useNavigate } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 
 //Import Breadcrumb
 import Breadcrumbs from "../../components/Common/Breadcrumb"
 
 const BankAccount = (props) => {
-  const navigate  = useNavigate ();
+  const history = useHistory();
 
   const handleSubmit = async (event, errors, values) => {
     var abc=values;
     await Axios.post("/bank-account",values)
     .then((response) => {
       if(response.data.status===201){
-        navigate("/bank-account-list");
+        history.push("/bank-account-list");
       }else{
 
       }
