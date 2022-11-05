@@ -8,6 +8,7 @@ import "./datatables.scss"
 
 import Axios from "../../helpers/axios_helper"
 import ChequeRecordModal from "./model"
+import TableLoader from "../../components/Common/TableLoader"
 
 var tabledata = {
   columns: [
@@ -116,26 +117,28 @@ const DatatableTables = () => {
       setListData(tabledata)
     });
   }
+  
   useEffect(async () => {
     loadList();
   },[]);
 
   return (
-    <React.Fragment>
+    <>
       <div className="page-content">
-
         <Breadcrumbs title="Cheque Record" breadcrumbItem="List of Cheque Record" />
 
         <Row>
           <Col className="col-12">
             <Card>
               <CardBody>
-                {listData &&
+                {listData ?
                   <MDBDataTable 
                   responsive 
                   striped 
                   bordered 
                   data={listData} />
+                  :
+                  <TableLoader/>
                 }
               </CardBody>
             </Card>
@@ -168,7 +171,7 @@ const DatatableTables = () => {
         </Col>
       </div>
       
-    </React.Fragment>
+    </>
   )
 }
 

@@ -5,7 +5,7 @@ import { Row, Col, Card, CardBody, CardTitle, CardSubtitle } from "reactstrap"
 //Import Breadcrumb
 import Breadcrumbs from "../../components/Common/Breadcrumb"
 import "./datatables.scss"
-
+import TableLoader from "../../components/Common/TableLoader"
 import Axios from "../../helpers/axios_helper"
 
 const DatatableTables = () => {
@@ -92,13 +92,15 @@ const DatatableTables = () => {
           <Col className="col-12">
             <Card>
               <CardBody>
-                {listData &&
+                {listData ?
                   <MDBDataTable 
                   responsive 
                   striped 
                   bordered 
                   loading
                   data={listData} />
+                  :
+                  <TableLoader/>
                 }
               </CardBody>
             </Card>
