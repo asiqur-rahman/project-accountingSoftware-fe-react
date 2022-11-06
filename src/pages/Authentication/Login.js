@@ -52,7 +52,6 @@ const Login = (props) => {
       setNotification(error.message)
     })
   }
-
   return (
     <>
       <div className="account-pages pt-sm-5">
