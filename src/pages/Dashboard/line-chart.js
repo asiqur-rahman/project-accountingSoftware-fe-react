@@ -5,6 +5,7 @@ import {
     Card,
     CardBody,
   } from "reactstrap"
+  import TableLoader from "../../components/Common/TableLoader"
 
 const LineChart = (props) => {
 
@@ -76,7 +77,7 @@ const LineChart = (props) => {
                         </div>
                     </div>
                     <h4 className="card-title mb-4">Expense Report</h4>
-                    {details && 
+                    {details ?
                         <ReactApexChart
                             options={details.options}
                             series={details.series}
@@ -84,6 +85,8 @@ const LineChart = (props) => {
                             type="line"
                             className="apex-charts"
                         />
+                        :
+                        <TableLoader/>
                     }
                 </CardBody>
             </Card>

@@ -97,7 +97,6 @@ const DatatableTables = () => {
                   responsive 
                   striped 
                   bordered 
-                  loading
                   data={listData} />
                   :
                   <TableLoader/>

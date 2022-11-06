@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Row, Col, Card, CardBody } from "reactstrap"
 import ReactApexChart from "react-apexcharts"
+import TableLoader from "../../components/Common/TableLoader"
 
 const ExpenseAnalysis = ( props ) => {
 
@@ -34,16 +35,17 @@ const ExpenseAnalysis = ( props ) => {
           <CardBody>
             <h4 className="card-title mb-4">Expense Review</h4>
 
-            <Row className="align-items-center">
+            <Row className="align-items-center" style={{minHeight:analysis?"260px":"0px"}}>
               <Col sm={12}>
-                {analysis &&
+                {analysis ?
                   <ReactApexChart
                     options={analysis.options}
                     series={analysis.series}
                     type="donut"
                     height={245}
                     className="apex-charts"
-                  />
+                  />:
+                  <TableLoader/>
                 }
               </Col>
             </Row>

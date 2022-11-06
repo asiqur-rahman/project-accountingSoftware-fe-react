@@ -117,7 +117,7 @@ const DatatableTables = () => {
       setListData(tabledata)
     });
   }
-  
+
   useEffect(async () => {
     loadList();
   },[]);
@@ -125,7 +125,7 @@ const DatatableTables = () => {
   return (
     <>
       <div className="page-content">
-        <Breadcrumbs title="Cheque Record" breadcrumbItem="List of Cheque Record" />
+        <Breadcrumbs title="Cheque Record" breadcrumbItem="List of Cheque Records" />
 
         <Row>
           <Col className="col-12">
@@ -151,7 +151,7 @@ const DatatableTables = () => {
             centered={true}
           >
             <div className="modal-header">
-              <h5 className="modal-title mt-0">Update Modal</h5>
+              <h5 className="modal-title mt-0">Update Cheque</h5>
               <button
                 type="button"
                 onClick={() => {

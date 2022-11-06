@@ -110,7 +110,7 @@ const DatatableTables = () => {
     <React.Fragment>
       <div className="page-content">
 
-        <Breadcrumbs title="Bank Account" breadcrumbItem="List of Bank Account" />
+        <Breadcrumbs title="Bank Account" breadcrumbItem="List of Bank Accounts" />
 
         <Row>
           <Col className="col-12">
@@ -137,7 +137,7 @@ const DatatableTables = () => {
             centered={true}
           >
             <div className="modal-header">
-              <h5 className="modal-title mt-0">Update Modal</h5>
+              <h5 className="modal-title mt-0">Update Bank Account</h5>
               <button
                 type="button"
                 onClick={() => {

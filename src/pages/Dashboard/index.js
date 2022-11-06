@@ -49,13 +49,14 @@ const Dashboard = () => {
             <Card >
               <CardBody>
                 <div className="d-flex align-items-start">
-                  <div className="avatar-sm font-size-20 me-3">
+                  {/* <div className="avatar-sm font-size-20 me-3"> */}
+                  <div className="font-size-20" style={{height:"2rem",width:"2rem",marginRight:"0.4rem"}}>
                     <span className="avatar-title bg-soft-primary text-primary rounded">
                       <i className="mdi mdi-archive-arrow-down-outline"></i>
                     </span>
                   </div>
                   <div className="flex-1">
-                    <div className="font-size-16 mt-2">Income Today</div>
+                    <div className="font-size-15 mt-2">Income Today</div>
                   </div>
                 </div>
                 <h4 className="mt-4">{topData ? topData.IncomeToday : 0} Tk.</h4> 
@@ -66,13 +67,13 @@ const Dashboard = () => {
             <Card >
               <CardBody>
                 <div className="d-flex align-items-start">
-                  <div className="avatar-sm font-size-20 me-3">
+                  <div className="font-size-20" style={{height:"2rem",width:"2rem",marginRight:"0.4rem"}}>
                     <span className="avatar-title bg-soft-primary text-primary rounded">
                       <i className="mdi mdi-archive-arrow-down"></i>
                     </span>
                   </div>
                   <div className="flex-1">
-                    <div className="font-size-16 mt-2">Income This Month</div>
+                    <div className="font-size-15 mt-2">Income This Month</div>
                   </div>
                 </div>
                 <h4 className="mt-4">{topData ? topData.IncomeThisMonth : 0} Tk.</h4> 
@@ -83,13 +84,13 @@ const Dashboard = () => {
             <Card >
               <CardBody>
                 <div className="d-flex align-items-start">
-                  <div className="avatar-sm font-size-20 me-3">
+                  <div className="font-size-20" style={{height:"2rem",width:"2rem",marginRight:"0.4rem"}}>
                     <span className="avatar-title bg-soft-primary text-primary rounded">
                       <i className="mdi mdi-archive-arrow-up-outline"></i>
                     </span>
                   </div>
                   <div className="flex-1">
-                    <div className="font-size-16 mt-2">Today Expense</div>
+                    <div className="font-size-15 mt-2">Today Expense</div>
                   </div>
                 </div>
                 <h4 className="mt-4">{topData ? topData.ExpenseToday : 0} Tk.</h4> 
@@ -100,13 +101,13 @@ const Dashboard = () => {
             <Card >
               <CardBody lg={3}>
                 <div className="d-flex align-items-start">
-                  <div className="avatar-sm font-size-20 me-3">
+                  <div className="font-size-20" style={{height:"2rem",width:"2rem",marginRight:"0.4rem"}}>
                     <span className="avatar-title bg-soft-primary text-primary rounded">
                       <i className="mdi mdi-archive-arrow-up"></i>
                     </span>
                   </div>
                   <div className="flex-1">
-                    <div className="font-size-16 mt-2">Expense This Month</div>
+                    <div className="font-size-15 mt-2">Expense This Month</div>
                   </div>
                 </div>
                 <h4 className="mt-4">{topData ? topData.ExpenseThisMonth : 0} Tk.</h4> 
