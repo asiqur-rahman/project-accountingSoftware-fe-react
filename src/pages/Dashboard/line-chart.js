@@ -18,7 +18,7 @@ const LineChart = (props) => {
                 series : [{
                     name: "Expense",
                     type: 'line',
-                    data: props.details.dates.split(',')//[20, 34, 27, 59, 37, 26, 38, 25],
+                    data: props.details?.sales?props.details.sales.split(','):[]//[20, 34, 27, 59, 37, 26, 38, 25],
                     }],
                 options : {
                     chart: {
@@ -43,7 +43,7 @@ const LineChart = (props) => {
                         size: 3
                     },
                     xaxis: {
-                        categories: props.details.dates.split(','),//['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+                        categories: props.details?.dates?props.details.dates.split(','):[],//['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
                         title: {
                             text: 'Date'
                         }

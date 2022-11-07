@@ -39,6 +39,12 @@ const DatatableTables = () => {
         width: 270,
       },
       {
+        label: "Description",
+        field: "description",
+        sort: "asc",
+        width: 270,
+      },
+      {
         label: "Action",
         field: "action",
         sort: "asc",

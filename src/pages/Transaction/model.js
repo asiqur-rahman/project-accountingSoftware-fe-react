@@ -16,8 +16,11 @@ import Flatpickr from "react-flatpickr"
 import Select from "react-select"
 
 import Axios from "../../helpers/axios_helper"
+import { useHistory  } from "react-router-dom"
+const moment = require('moment');
 
 const Model = (props) => {
+  const history = useHistory()
   const [transactionType, setTransactionType] = useState([])
   const [transactionTypeId, setTransactionTypeId] = useState(0)
   const [accountingHeads, setAccountingHeads] = useState([])
@@ -25,9 +28,10 @@ const Model = (props) => {
   const [allAssets, setAllAssets] = useState([])
   const [accountToId, setAccountToId] = useState(0)
   const [allAccounts, setAllAccounts] = useState([])
-  const [dateTime, setDateTime] = useState()
+  const [dateTime, setDateTime] = useState(moment().format("YYYY-MM-DD"))
   const [transactionDetails, setTransactionDetails] = useState([])
   const [updateData, setUpdateData] = useState(false)
+  const [isItIncome, setIsItIncome] = useState(false)
 
     function handleRemoveRow(e, id) {
         if (typeof id != "undefined") {
@@ -54,7 +58,7 @@ const Model = (props) => {
             }
         })
 
-        if(!selectedIdFound)oldTransactionDetails=[...oldTransactionDetails,{chartOfAccountId:accountFromId,debit:value,credit:''}]
+        if(!selectedIdFound)oldTransactionDetails=[...oldTransactionDetails,{chartOfAccountId:accountFromId,debit:'',credit:''}]
 
         selectedIdFound=false;
         oldTransactionDetails.map(item=>{
@@ -64,16 +68,19 @@ const Model = (props) => {
             }
         })
 
-        if(!selectedIdFound)oldTransactionDetails=[...oldTransactionDetails,{chartOfAccountId:accountToId,credit:'',credit:value}]
+        if(!selectedIdFound)oldTransactionDetails=[...oldTransactionDetails,{chartOfAccountId:accountToId,debit:'',credit:''}]
         
         setTransactionDetails(oldTransactionDetails)
     }
 
     const transactionTypeChangeHandler = async (value) => {
         if(value){
+            if(value=='401'){
+                setIsItIncome(true);
+            }
             setAccountFromId(0);
             setAccountToId(0);
-            await Axios.get(`/account/byParentId/${value}`)
+            await Axios.get(`/account/byBaseCode/${value}`)
             .then((response) => {
                 if(response.data.status===200){
                     setAccountingHeads(response.data.data)
@@ -88,32 +95,40 @@ const Model = (props) => {
     }
 
     const handleSubmit = async (event, errors, values) => {
-        values.debitAccountId=accountFromId;
-        values.creditAccountId=accountToId;
-        values.transactionNo=Date.now().toString();
-        values.dateTime=dateTime;
-        if(updateData){
-            values.id=updateData.id;
-            // await Axios.patch(`/cheque/id/${updateData.id}`,values)
-            // .then((response) => {
-            //     props.handleCallback(response.data)
-            // })
-            // .catch((e)=>{
-            //     alert(e.message)
-            // })
-        }
-        else{
-            // await Axios.post("/cheque",values)
-            // .then((response) => {
-            //     if(response.data.status===201){
-            //         history.push("/cheque-list");
-            //     }else{
-            //         alert(response.data.message)
-            //     }
-            // })
-            // .catch((e)=>{
-            //     var e=e;
-            // })
+        values.amount=parseInt(values.amount)
+        var totalDebit=0;
+        var totalCredit=0;
+        transactionDetails.map(item=>{
+            item.debit=parseInt(item.debit===''?0:item.debit);
+            item.credit=parseInt(item.credit===''?0:item.credit);
+            totalDebit+= item.debit;
+            totalCredit+= item.credit;
+        })
+        if(totalCredit==totalDebit && totalCredit==values.amount){
+            const jsonData ={
+                debitAccountId:isItIncome?accountFromId:accountToId,
+                creditAccountId:isItIncome?accountToId:accountFromId,
+                transactionNo:Date.now().toString(),
+                dateTime:dateTime,
+                amount:values.amount,
+                description:values.description,
+                isItIncome:isItIncome,
+                transactionDetails
+            }
+            await Axios.post("/transaction/withDetails",jsonData)
+            .then((response) => {
+                if(response.data.status===201){
+                    history.push("/transaction-list");
+                }else{
+                    alert(response.data.message)
+                }
+            })
+            .catch((e)=>{
+                var e=e;
+            })
+
+        }else{
+            alert("Amount Mismatch !")
         }
     }
 
@@ -258,6 +273,8 @@ const Model = (props) => {
                                 placeholder=" "
                                 type="text"
                                 className="form-control"
+                                errorMessage="Please provide description."
+                                validate={{ required: { value: true } }}
                             />
                         </div>
                         </Col>
