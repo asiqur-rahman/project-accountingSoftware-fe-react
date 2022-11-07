@@ -20,65 +20,93 @@ import { useHistory  } from "react-router-dom"
 
 
 const Model = (props) => {
-  const history = useHistory()
   const [transactionType, setTransactionType] = useState([])
+  const [transactionTypeId, setTransactionTypeId] = useState(0)
+  const [accountingHeads, setAccountingHeads] = useState([])
+  const [accountFromId, setAccountFromId] = useState(0)
   const [allAssets, setAllAssets] = useState([])
-  const [bankAccounts, setbankAccounts] = useState([])
-  const [bankAccountId, setBankAccountId] = useState(0)
+  const [accountToId, setAccountToId] = useState(0)
+  const [allAccounts, setAllAccounts] = useState([])
   const [dateTime, setDateTime] = useState()
   const [updateData, setUpdateData] = useState(false)
 
-  const [rows2, setrows2] = useState([])
+  const [rows, setrows] = useState([])
 
     function handleRemoveRow(e, id) {
         if (typeof id != "undefined")
             document.getElementById("addr" + id).style.display = "none"
     }
 
-    function handleAddRowNested1() {
-        const item2 = { name1: "" }
-        setrows2([...rows2, item2])
+    // chartOfAccountId:item.chartOfAccountId,
+    // taxId:item.taxId,
+    // debit:item.debit,
+    // credit:item.credit,
+    // transactionId:data.id
+
+    function handleAddRowNested() {
+        const item = { name1: "" }
+        setrows([...rows, item])
     }
 
-  const handleSubmit = async (event, errors, values) => {
-    values.bankAccountId=bankAccountId;
-    values.dateTime=dateTime;
-    if(updateData){
-        values.id=updateData.id;
-        await Axios.patch(`/cheque/id/${updateData.id}`,values)
-        .then((response) => {
-            props.handleCallback(response.data)
-        })
-        .catch((e)=>{
-            alert(e.message)
-        })
-    }
-    else{
-        await Axios.post("/cheque",values)
-        .then((response) => {
-        if(response.data.status===201){
-            history.push("/cheque-list");
-        }else{
-            alert(response.data.message)
+    const transactionTypeChangeHandler = async (value) => {
+        if(value){
+            setAccountFromId(0);
+            setAccountToId(0);
+            await Axios.get(`/account/byParentId/${value}`)
+            .then((response) => {
+                if(response.data.status===200){
+                    setAccountingHeads(response.data.data)
+                }else{
+                    alert(response.data.message)
+                }
+            })
+            .catch((e)=>{
+                alert(e.message)
+            })
         }
-        })
-        .catch((e)=>{
-            var e=e;
-        })
     }
-  }
+
+    const handleSubmit = async (event, errors, values) => {
+        values.debitAccountId=accountFromId;
+        values.creditAccountId=accountToId;
+        values.transactionNo=Date.now().toString();
+        values.dateTime=dateTime;
+        if(updateData){
+            values.id=updateData.id;
+            // await Axios.patch(`/cheque/id/${updateData.id}`,values)
+            // .then((response) => {
+            //     props.handleCallback(response.data)
+            // })
+            // .catch((e)=>{
+            //     alert(e.message)
+            // })
+        }
+        else{
+            // await Axios.post("/cheque",values)
+            // .then((response) => {
+            //     if(response.data.status===201){
+            //         history.push("/cheque-list");
+            //     }else{
+            //         alert(response.data.message)
+            //     }
+            // })
+            // .catch((e)=>{
+            //     var e=e;
+            // })
+        }
+    }
 
   useEffect(async () => {
     if(props.id && props.id > 0){
-        await Axios.get(`/cheque/id/${props.id}`)
-        .then((response) => { 
-        if(response.data.status===200){
-            setBankAccountId(response.data.data.bankAccountId);
-            setUpdateData(response.data.data);
-        }
-        })
+        // await Axios.get(`/cheque/id/${props.id}`)
+        // .then((response) => { 
+        // if(response.data.status===200){
+        //     setBankAccountId(response.data.data.bankAccountId);
+        //     setUpdateData(response.data.data);
+        // }
+        // })
     }
-    await Axios.get("/transaction/type")
+    await Axios.get("/transaction/typeDD")
     .then((response) => { 
       if(response.data.status===200){
         setTransactionType(response.data.data);
@@ -90,18 +118,28 @@ const Model = (props) => {
   },[props.id]);
 
   useEffect(async () => {
-    if(transactionType.length>0){
-        await Axios.get("/transaction/allAssets")
-        .then((response) => { 
-        if(response.data.status===200){
-            setAllAssets(response.data.data);
-        }
-        else{
-            setAllAssets([])
-        }
+    if(accountingHeads.length>0 && allAssets.length==0){
+        await Axios.get("/transaction/allAssetsDD")
+            .then((response) => { 
+            if(response.data.status===200){
+                setAllAssets(response.data.data);
+            }
+            else{
+                setAllAssets([])
+            }
+        });
+
+        await Axios.get("/account/allDD")
+            .then((response) => { 
+            if(response.data.status===200){
+                setAllAccounts(response.data.data);
+            }
+            else{
+                setAllAccounts([])
+            }
         });
     }
-  },[transactionType]);
+  },[accountingHeads]);
 
 
   return (
@@ -114,40 +152,40 @@ const Model = (props) => {
                     <Row>
                         <Col md="6">
                         <div className="mb-3">
-                            <Label htmlFor="validationCustom01">Transaction type</Label>
+                            <Label>Transaction type</Label>
                             <Select
                                 options={transactionType}
-                                value={transactionType.filter(x=>x.value==bankAccountId)[0]}
-                                onChange={(e)=>{setBankAccountId(e.value);}}
+                                value={transactionType ? transactionType.filter(x=>x.value==transactionTypeId)[0]:null}
+                                onChange={(e)=>{transactionTypeChangeHandler(e.value); setTransactionTypeId(e.value);}}
                                 name="bankAccountId"
                             />
                         </div>
                         </Col>
                         <Col md="6">
                         <div className="mb-3">
-                            <Label htmlFor="validationCustom01">Accounting Head</Label>
+                            <Label>Accounting Head</Label>
                             <Select
-                                options={bankAccounts}
-                                value={bankAccounts.filter(x=>x.value==bankAccountId)[0]}
-                                onChange={(e)=>{setBankAccountId(e.value);}}
+                                options={accountingHeads}
+                                value={accountingHeads.filter(x=>x.value==accountFromId)[0]}
+                                onChange={(e)=>{setAccountFromId(e.value);}}
                                 name="accountFromId"
                             />
                         </div>
                         </Col>
                         <Col md="6">
                         <div className="mb-3">
-                            <Label htmlFor="validationCustom01">How did you pay</Label>
+                            <Label>How did you pay</Label>
                             <Select
                                 options={allAssets}
-                                value={allAssets.filter(x=>x.value==bankAccountId)[0]}
-                                onChange={(e)=>{setBankAccountId(e.value);}}
+                                value={allAssets.filter(x=>x.value==accountToId)[0]}
+                                onChange={(e)=>{setAccountToId(e.value);}}
                                 name="accountToId"
                             />
                         </div>
                         </Col>
                         <Col md="6">
                         <div className="mb-3">
-                            <Label htmlFor="validationCustom04">Date</Label>
+                            <Label>Date</Label>
                             <Flatpickr
                                     name="dateTime"
                                     className="form-control d-block"
@@ -163,13 +201,12 @@ const Model = (props) => {
                                     // console.log({ firstDate, dateStr });
                                     setDateTime(dateStr);
                                 }}
-                                id="validationCustom04"
                             />
                         </div>
                         </Col>
                         <Col md="6">
                         <div className="mb-3">
-                            <Label htmlFor="validationCustom05">Amount</Label>
+                            <Label>Amount</Label>
                             <AvField
                             name="amount"
                             placeholder="0"
@@ -178,7 +215,6 @@ const Model = (props) => {
                             errorMessage=" Please provide transaction amount."
                             className="form-control"
                             validate={{ required: { value: true } }}
-                            id="validationCustom05"
                             />
                         </div>
                         </Col>
@@ -191,7 +227,6 @@ const Model = (props) => {
                             placeholder=" "
                             type="text"
                             className="form-control"
-                            id="validationCustom05"
                             />
                         </div>
                         </Col>
@@ -204,7 +239,13 @@ const Model = (props) => {
                                 <div data-repeater-item className="row">
                                     <div className="mb-3 col-lg-5">
                                         <label htmlFor="name">Account</label>
-                                        <input type="text" name="accountType" className="form-control" />
+                                        {/* <input type="text" name="accountType" className="form-control" /> */}
+                                        <Select
+                                            options={allAccounts}
+                                            value={allAccounts.filter(x=>x.value==transactionTypeId)[0]}
+                                            onChange={(e)=>{transactionTypeChangeHandler(e.value); setTransactionTypeId(e.value);}}
+                                            name="bankAccountId2"
+                                        />
                                     </div>
 
                                     <div className="mb-3 col-lg-3">
@@ -233,7 +274,7 @@ const Model = (props) => {
                                 </div>
 
                             </div>
-                            {rows2.map((item2, idx) => (
+                            {rows.map((item, idx) => (
                                 <React.Fragment key={idx}>
                                 <div data-repeater-list="group-a" id={"addr" + idx} >
                                     <div data-repeater-item className="row">
@@ -269,7 +310,7 @@ const Model = (props) => {
                             ))}
                             <Button
                                 onClick={() => {
-                                    handleAddRowNested1()
+                                    handleAddRowNested()
                                 }}
                                 color="success"
                                 className="btn btn-success mt-3 mt-lg-0"
