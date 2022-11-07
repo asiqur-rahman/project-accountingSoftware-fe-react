@@ -16,8 +16,6 @@ import Flatpickr from "react-flatpickr"
 import Select from "react-select"
 
 import Axios from "../../helpers/axios_helper"
-import { useHistory  } from "react-router-dom"
-
 
 const Model = (props) => {
   const [transactionType, setTransactionType] = useState([])
@@ -28,13 +26,15 @@ const Model = (props) => {
   const [accountToId, setAccountToId] = useState(0)
   const [allAccounts, setAllAccounts] = useState([])
   const [dateTime, setDateTime] = useState()
+  const [transactionDetails, setTransactionDetails] = useState([])
   const [updateData, setUpdateData] = useState(false)
 
-  const [rows, setrows] = useState([])
-
     function handleRemoveRow(e, id) {
-        if (typeof id != "undefined")
-            document.getElementById("addr" + id).style.display = "none"
+        if (typeof id != "undefined") {
+            document.getElementById("repeater" + id).innerHTML = ""
+            const filteredTransactionDetails=transactionDetails.filter(x=>x.chartOfAccountId!=transactionDetails[id].chartOfAccountId);
+            setTransactionDetails(filteredTransactionDetails)
+        }
     }
 
     // chartOfAccountId:item.chartOfAccountId,
@@ -43,9 +43,30 @@ const Model = (props) => {
     // credit:item.credit,
     // transactionId:data.id
 
-    function handleAddRowNested() {
-        const item = { name1: "" }
-        setrows([...rows, item])
+    const amountChangeEvent = (value) =>{
+        var oldTransactionDetails =transactionDetails;
+        var selectedIdFound=false;
+
+        oldTransactionDetails.map(item=>{
+            if(item.chartOfAccountId==accountFromId){
+                item.debit=parseInt(value);
+                selectedIdFound=true;
+            }
+        })
+
+        if(!selectedIdFound)oldTransactionDetails=[...oldTransactionDetails,{chartOfAccountId:accountFromId,debit:value,credit:''}]
+
+        selectedIdFound=false;
+        oldTransactionDetails.map(item=>{
+            if(item.chartOfAccountId==accountToId){
+                item.credit=parseInt(value);
+                selectedIdFound=true;
+            }
+        })
+
+        if(!selectedIdFound)oldTransactionDetails=[...oldTransactionDetails,{chartOfAccountId:accountToId,credit:'',credit:value}]
+        
+        setTransactionDetails(oldTransactionDetails)
     }
 
     const transactionTypeChangeHandler = async (value) => {
@@ -96,50 +117,59 @@ const Model = (props) => {
         }
     }
 
-  useEffect(async () => {
-    if(props.id && props.id > 0){
-        // await Axios.get(`/cheque/id/${props.id}`)
-        // .then((response) => { 
-        // if(response.data.status===200){
-        //     setBankAccountId(response.data.data.bankAccountId);
-        //     setUpdateData(response.data.data);
-        // }
-        // })
-    }
-    await Axios.get("/transaction/typeDD")
-    .then((response) => { 
-      if(response.data.status===200){
-        setTransactionType(response.data.data);
-      }
-      else{
-        setTransactionType([])
-      }
-    });
-  },[props.id]);
-
-  useEffect(async () => {
-    if(accountingHeads.length>0 && allAssets.length==0){
-        await Axios.get("/transaction/allAssetsDD")
-            .then((response) => { 
-            if(response.data.status===200){
-                setAllAssets(response.data.data);
-            }
-            else{
-                setAllAssets([])
+    const transactionDetailsChangeEvent = (id,name,value) => {
+        transactionDetails.map((item,index)=>{
+            if(index==id){
+                item[name]=value;
             }
         });
-
-        await Axios.get("/account/allDD")
-            .then((response) => { 
-            if(response.data.status===200){
-                setAllAccounts(response.data.data);
-            }
-            else{
-                setAllAccounts([])
-            }
-        });
+        setTransactionDetails(transactionDetails);
     }
-  },[accountingHeads]);
+
+    useEffect(async () => {
+        if(props.id && props.id > 0){
+            // await Axios.get(`/cheque/id/${props.id}`)
+            // .then((response) => { 
+            // if(response.data.status===200){
+            //     setBankAccountId(response.data.data.bankAccountId);
+            //     setUpdateData(response.data.data);
+            // }
+            // })
+        }
+        await Axios.get("/transaction/typeDD")
+        .then((response) => { 
+        if(response.data.status===200){
+            setTransactionType(response.data.data);
+        }
+        else{
+            setTransactionType([])
+        }
+        });
+    },[props.id]);
+
+    useEffect(async () => {
+        if(accountingHeads.length>0 && allAssets.length==0){
+            await Axios.get("/transaction/allAssetsDD")
+                .then((response) => { 
+                if(response.data.status===200){
+                    setAllAssets(response.data.data);
+                }
+                else{
+                    setAllAssets([])
+                }
+            });
+
+            await Axios.get("/account/allDD")
+                .then((response) => { 
+                if(response.data.status===200){
+                    setAllAccounts(response.data.data);
+                }
+                else{
+                    setAllAccounts([])
+                }
+            });
+        }
+    },[accountingHeads]);
 
 
   return (
@@ -208,13 +238,14 @@ const Model = (props) => {
                         <div className="mb-3">
                             <Label>Amount</Label>
                             <AvField
-                            name="amount"
-                            placeholder="0"
-                            defaultValue={updateData.amount}
-                            type="number"
-                            errorMessage=" Please provide transaction amount."
-                            className="form-control"
-                            validate={{ required: { value: true } }}
+                                name="amount"
+                                placeholder="0"
+                                defaultValue={updateData.amount}
+                                onChange={(e)=>{amountChangeEvent(e.target.value);}}
+                                type="number"
+                                errorMessage=" Please provide transaction amount."
+                                className="form-control"
+                                validate={{ required: { value: true } }}
                             />
                         </div>
                         </Col>
@@ -222,11 +253,11 @@ const Model = (props) => {
                         <div className="mb-3">
                             <Label htmlFor="validationCustom05">Description</Label>
                             <AvField
-                            name="description"
-                            defaultValue={updateData.description}
-                            placeholder=" "
-                            type="text"
-                            className="form-control"
+                                name="description"
+                                defaultValue={updateData.description}
+                                placeholder=" "
+                                type="text"
+                                className="form-control"
                             />
                         </div>
                         </Col>
@@ -235,62 +266,32 @@ const Model = (props) => {
                     <Row>
                         <Col xs={12}>
                             <div className="repeater">
-                            <div data-repeater-list="group-a">
-                                <div data-repeater-item className="row">
-                                    <div className="mb-3 col-lg-5">
-                                        <label htmlFor="name">Account</label>
-                                        {/* <input type="text" name="accountType" className="form-control" /> */}
-                                        <Select
-                                            options={allAccounts}
-                                            value={allAccounts.filter(x=>x.value==transactionTypeId)[0]}
-                                            onChange={(e)=>{transactionTypeChangeHandler(e.value); setTransactionTypeId(e.value);}}
-                                            name="bankAccountId2"
-                                        />
-                                    </div>
-
-                                    <div className="mb-3 col-lg-3">
-                                        <label htmlFor="email">Debit</label>
-                                        <input type="number" name="debitAmount" className="form-control" />
-                                    </div>
-
-                                    <div className="mb-3 col-lg-3">
-                                        <label htmlFor="subject">Credit</label>
-                                        <input type="number" name="creditAmount" className="form-control" />
-                                    </div>
-
-                                    {/* <div className="mb-3 col-lg-2">
-                                        <label htmlFor="message">Message</label>
-                                        <textarea id="message" className="form-control"></textarea>
-                                    </div> */}
-
-                                    <Col lg={1} className="align-self-center mt-2">
-                                        <button
-                                            data-repeater-delete
-                                            type="button"
-                                            className="btn btn-danger waves-effect waves-light">
-                                                <i className="bx bx-trash font-size-20 align-middle"></i>
-                                        </button>
-                                    </Col>
-                                </div>
-
-                            </div>
-                            {rows.map((item, idx) => (
+                            {transactionDetails && transactionDetails.map((item, idx) => (
                                 <React.Fragment key={idx}>
-                                <div data-repeater-list="group-a" id={"addr" + idx} >
+                                <div data-repeater-list="group-a" id={"repeater" + idx} >
                                     <div data-repeater-item className="row">
                                         <div className="mb-3 col-lg-5">
                                             <label htmlFor="name">Account</label>
-                                            <input type="text" name="accountType" className="form-control" />
+                                            <Select
+                                                options={allAccounts}
+                                                value={allAccounts.filter(x=>x.value==item.chartOfAccountId)[0]}
+                                                onChange={(e)=>{transactionDetailsChangeEvent(idx,"chartOfAccountId",e.value);}}
+                                                name="chartOfAccountId"
+                                            />
                                         </div>
 
                                         <div className="mb-3 col-lg-3">
-                                            <label htmlFor="email">Debit</label>
-                                            <input type="number" name="debitAmount" className="form-control" />
+                                            <label>Debit</label>
+                                            <input type="number" name="debit" className="form-control" 
+                                            onChange={(e)=>{transactionDetailsChangeEvent(idx,"debit",e.target.value);}}
+                                            defaultValue={item.debit}/>
                                         </div>
 
                                         <div className="mb-3 col-lg-3">
                                             <label htmlFor="subject">Credit</label>
-                                            <input type="number" name="creditAmount" className="form-control" />
+                                            <input type="number" name="credit" className="form-control"
+                                            onChange={(e)=>{transactionDetailsChangeEvent(idx,"credit",e.target.value);}}
+                                            defaultValue={item.credit}/>
                                         </div>
 
                                         <Col lg={1} className="align-self-center mt-2">
@@ -300,7 +301,8 @@ const Model = (props) => {
                                                 className="btn btn-danger waves-effect waves-light"
                                                 onClick={e => {
                                                     handleRemoveRow(e , idx)
-                                                }}><i className="bx bx-trash font-size-20 align-middle"></i>
+                                                }}>
+                                                <i className="bx bx-trash font-size-20 align-middle"></i>
                                             </button>
                                         </Col>
                                     </div>
@@ -310,7 +312,7 @@ const Model = (props) => {
                             ))}
                             <Button
                                 onClick={() => {
-                                    handleAddRowNested()
+                                    setTransactionDetails([...transactionDetails,{chartOfAccountId:0,debit:'',credit:''}])
                                 }}
                                 color="success"
                                 className="btn btn-success mt-3 mt-lg-0"
