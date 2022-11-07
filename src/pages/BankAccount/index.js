@@ -107,7 +107,7 @@ const DatatableTables = () => {
   },[]);
 
   return (
-    <React.Fragment>
+    <>
       <div className="page-content">
 
         <Breadcrumbs title="Bank Account" breadcrumbItem="List of Bank Accounts" />
@@ -157,7 +157,7 @@ const DatatableTables = () => {
         </Col>
       </div>
 
-    </React.Fragment>
+    </>
   )
 }
 
