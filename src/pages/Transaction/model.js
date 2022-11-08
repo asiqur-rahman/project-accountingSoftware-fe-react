@@ -53,7 +53,8 @@ const Model = (props) => {
 
         oldTransactionDetails.map(item=>{
             if(item.chartOfAccountId==accountFromId){
-                item.debit=parseInt(value);
+                item.debit='';//parseInt(value);
+                item.credit='';
                 selectedIdFound=true;
             }
         })
@@ -63,7 +64,8 @@ const Model = (props) => {
         selectedIdFound=false;
         oldTransactionDetails.map(item=>{
             if(item.chartOfAccountId==accountToId){
-                item.credit=parseInt(value);
+                item.credit='';//parseInt(value);
+                item.debit='';
                 selectedIdFound=true;
             }
         })

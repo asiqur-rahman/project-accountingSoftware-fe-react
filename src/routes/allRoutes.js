@@ -126,6 +126,8 @@ const userRoutes = [
   { path: "/calendar", component: Calendar },
 
   //Account
+  { path: "/chart-of-account", component: ChartOfAccountCreate },
+  { path: "/chart-of-account-list", component: ChartOfAccountIndex },
   { path: "/transaction", component: TransactionCreate },
   { path: "/transaction-list", component: TransactionIndex },
 
