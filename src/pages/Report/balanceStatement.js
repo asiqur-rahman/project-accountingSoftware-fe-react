@@ -4,11 +4,10 @@ import { Row, Col, Card, CardBody, Modal } from "reactstrap"
 //Import Breadcrumb
 import Breadcrumbs from "../../components/Common/Breadcrumb"
 import "./treeView.scss"
-import ChartOfAccountModel from "./model"
 
 import Axios from "../../helpers/axios_helper"
 
-const ChartOfAccount = () => {
+const BalanceStatement = () => {
 
   const [listData, setListData] = useState(false)
   const [modal_center, setmodal_center] = useState(false)
@@ -26,7 +25,7 @@ const ChartOfAccount = () => {
   }
 
   const loadList =async ()=>{
-    await Axios.get("/account/treeWiseData")
+    await Axios.get("/report/balance-sheet")
     .then((response) => { 
       if(response.data.status===200){
         setListData(response.data.data);
@@ -93,35 +92,10 @@ const ChartOfAccount = () => {
             </Card>
           </Col>
         </Row>
-        <Col>
-          <Modal
-            size="lg"
-            isOpen={modal_center}
-            centered={true}
-          >
-            <div className="modal-header">
-              <h5 className="modal-title mt-0">Update Bank Account</h5>
-              <button
-                type="button"
-                onClick={() => {
-                  setmodal_center(false)
-                }}
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              > 
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body" style={{padding:"0"}}>
-              <ChartOfAccountModel id={selectedDataId.current} handleCallback={handleCallback}/>
-            </div>
-          </Modal>
-        </Col>
       </div>
 
     </>
   )
 }
 
-export default ChartOfAccount
+export default BalanceStatement

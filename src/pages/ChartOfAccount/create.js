@@ -10,7 +10,7 @@ const ChartOfAccount = () => {
   return (
     <>
       <div className="page-content">
-          <Breadcrumbs title="Cheque" breadcrumbItem="New Cheque" />
+          <Breadcrumbs title="Char of Account" breadcrumbItem="New Char of Account" />
           <ChartOfAccountModel/>
       </div>
     </>

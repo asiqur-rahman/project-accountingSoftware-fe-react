@@ -28,6 +28,24 @@ const Model = (props) => {
   const [updateData, setUpdateData] = useState(false)
 
   const handleSubmit = async (event, errors, values) => {
+    if(updateData){
+      values.parentId=chartOfAccountId;
+      values.currencyId=currencyId;
+      values.isActive=1;
+      values.id=updateData.id;
+      await Axios.patch(`/account/id/${updateData.id}`,values)
+      .then((response) => {
+      if(response.data.status===201){
+        props.handleCallback(response.data)
+      }else{
+          alert(response.data.message)
+      }
+      })
+      .catch((e)=>{
+          var e=e;
+      })
+  }
+  else{
     values.parentId=chartOfAccountId;
     values.currencyId=currencyId;
     values.isActive=1;
@@ -42,15 +60,18 @@ const Model = (props) => {
         .catch((e)=>{
             var e=e;
         })
-    // }
+    }
   }
 
   useEffect(async () => {
     if(props.id && props.id > 0){
-        await Axios.get(`/cheque/id/${props.id}`)
+        await Axios.get(`/account/id/${props.id}`)
         .then((response) => { 
         if(response.data.status===200){
-            setChartOfAccountId(response.data.data.bankAccountId);
+            setChartOfAccountId(response.data.data.parentId)
+            setCurrencyId(response.data.data.currencyId)
+            const splitedName =response.data.data.name.split(":")
+            response.data.data.name=splitedName[splitedName.length-1]
             setUpdateData(response.data.data);
         }
         })
@@ -105,7 +126,7 @@ const Model = (props) => {
                             <Label htmlFor="validationCustom03">Name</Label>
                             <AvField
                                 name="name"
-                                defaultValue={updateData.number}
+                                defaultValue={updateData.name}
                                 placeholder="Name"
                                 type="text"
                                 errorMessage=" Please provide a name."
@@ -132,7 +153,7 @@ const Model = (props) => {
                             <AvField
                             name="amount"
                             placeholder="0"
-                            defaultValue={updateData.amount}
+                            defaultValue={updateData['accountBalances.amount']}
                             type="number"
                             errorMessage=" Please provide initial amount."
                             className="form-control"

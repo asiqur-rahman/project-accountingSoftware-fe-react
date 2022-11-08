@@ -53,7 +53,7 @@ var tabledata = {
 
 const DatatableTables = () => {
 
-  const [listData, setListData] = useState(false);
+  const [listData, setListData] = useState(false)
 
   const [modal_center, setmodal_center] = useState(false)
   const selectedCheque = useRef(0)

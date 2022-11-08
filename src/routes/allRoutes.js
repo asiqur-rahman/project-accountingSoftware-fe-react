@@ -17,6 +17,11 @@ import ChequeIndex from "../pages/Cheque/index"
 import ChequeCreate from "../pages/Cheque/create"
 
 // User
+import BalanceSheet from "../pages/Report/balanceStatement"
+import IncomeStatement from "../pages/Report/incomeStatement"
+
+
+// User
 import UserIndex from "../pages/User/index"
 import UserCreate from "../pages/User/create"
 
@@ -138,6 +143,11 @@ const userRoutes = [
   { path: "/cheque/:id", component: ChequeCreate },
   { path: "/cheque-list", component: ChequeIndex },
 
+  //Report
+  { path: "/balance-sheet", component: BalanceSheet },
+  { path: "/income-statement", component: IncomeStatement },
+
+    
   //User
   { path: "/user", component: UserCreate },
   { path: "/user-list", component: UserIndex },
