@@ -196,7 +196,7 @@ const SidebarContent = props => {
               </ul>
             </li>
 
-            <li className="menu-title">{props.t("Other")}</li>
+            {/* <li className="menu-title">{props.t("Other")}</li>
 
             <li>
               <Link to="/calendar" className=" waves-effect">
@@ -509,7 +509,7 @@ const SidebarContent = props => {
                   </ul>
                 </li>
               </ul>
-            </li>
+            </li> */}
           </ul>
         </div>
       </SimpleBar>
