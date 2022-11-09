@@ -13,6 +13,9 @@ import avatar2 from "../../assets/images/users/avatar-2.jpg"
 
 const Sidebar = (props) => {
 
+  var ancsd=Session.getUser();
+  var ancd=Session.getUser().full_name;
+
   return (
     <>
       <div className="vertical-menu">

@@ -4,7 +4,7 @@ import { Row, Col, Card, CardBody } from "reactstrap"
 //Import Breadcrumb
 import Breadcrumbs from "../../components/Common/Breadcrumb"
 import "./treeView.scss"
-
+import TableLoader from "../../components/Common/TableLoader"
 import Axios from "../../helpers/axios_helper"
 
 const BalanceStatement = () => {
@@ -18,10 +18,10 @@ const BalanceStatement = () => {
         setListData(response.data.data);
       }
       else{
-        setListData([])
+        setListData(false)
       }
     }).catch(e=>{
-      setListData([])
+      setListData(false)
     })
   }
 
@@ -40,7 +40,7 @@ const BalanceStatement = () => {
             <Card>
               <CardBody>
                   <ol className="wtree">
-                    {listData && <>
+                    {listData ? <>
                       <li><span>Assets <p>BDT {listData.assetsTotal} Tk.</p></span>
                         <ol>
                           {listData.assetsData.map((item2,i2)=>{
@@ -132,7 +132,7 @@ const BalanceStatement = () => {
                         })}
                       </ol>
                     </li>
-                    </>
+                    </>: <TableLoader/>
                     }
                   </ol>
 
