@@ -2,32 +2,39 @@ import React, { useEffect, useState } from "react"
 import { Row, Col, Card, CardBody } from "reactstrap"
 import ReactApexChart from "react-apexcharts"
 import TableLoader from "../../components/Common/TableLoader"
+import Axios from "../../helpers/axios_helper"
 
 const ExpenseAnalysis = ( props ) => {
 
   const [analysis, setAnalysis] = useState(false);
 
+  const loadData = async (days=7) =>{
+      await Axios.get(`/dashboard/expenseAccountReview`)
+          .then((response) => { 
+              const details = response.data;
+              setAnalysis({
+                series: details.value,//[38, 26, 14],
+                options: {
+                  labels: details.key,//["Online", "Offline", "Marketing"],
+                  plotOptions: {
+                    pie: {
+                      donut: {
+                        size: '70%'
+                      }
+                    }
+                  },
+                  legend: {
+                    show: false,
+                  },
+                  // colors: ['#3b5de7', '#45cb85', '#eeb902'],
+                },
+              })
+          });
+    }
+
     useEffect(async () => {
-        if(props.details){
-          setAnalysis({
-            series: props.details.value,//[38, 26, 14],
-            options: {
-              labels: props.details.key,//["Online", "Offline", "Marketing"],
-              plotOptions: {
-                pie: {
-                  donut: {
-                    size: '70%'
-                  }
-                }
-              },
-              legend: {
-                show: false,
-              },
-              // colors: ['#3b5de7', '#45cb85', '#eeb902'],
-            },
-          })
-        }
-    },[props.details]);
+        loadData();
+    },[]);
 
     return (
       <>

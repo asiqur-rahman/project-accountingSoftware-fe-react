@@ -6,62 +6,69 @@ import {
     CardBody,
   } from "reactstrap"
   import TableLoader from "../../components/Common/TableLoader"
+  import Axios from "../../helpers/axios_helper"
 
-const LineChart = (props) => {
+const LineChart = () => {
 
     const [details, setDetails] = useState(false);
 
-    useEffect(async () => {
-        if(props.details){
-            setDetails(
-                {
-                series : [{
-                    name: "Expense",
-                    type: 'line',
-                    data: props.details?.sales?props.details.sales.split(','):[]//[20, 34, 27, 59, 37, 26, 38, 25],
-                    }],
-                options : {
-                    chart: {
-                        toolbar: {
-                            show: false
+    const loadData = async (days=7) =>{
+        await Axios.get(`/dashboard/dashboardApex/${days}`)
+            .then((response) => { 
+                const details = response.data[0];
+                setDetails(
+                    {
+                    series : [{
+                        name: "Expense",
+                        type: 'line',
+                        data: details?.sales?details.sales.split(','):[]//[20, 34, 27, 59, 37, 26, 38, 25],
+                        }],
+                    options : {
+                        chart: {
+                            toolbar: {
+                                show: false
+                            },
+                            zoom: {
+                                enabled: false
+                            }
                         },
-                        zoom: {
-                            enabled: false
+                        colors: ['#45cb85', '#3b5de7'],
+                        dataLabels: {
+                            enabled: false,
+                        },
+                        stroke: {
+                            curve: 'smooth',
+                            width: '3',
+                            dashArray: [0, 0],
+                        },
+                
+                        markers: {
+                            size: 3
+                        },
+                        xaxis: {
+                            categories: details?.dates?details.dates.split(','):[],//['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+                            title: {
+                                text: 'Date'
+                            }
+                        },
+                
+                        fill: {
+                            type: 'solid',
+                            opacity: [1, 0.1],
+                        },
+                
+                        legend: {
+                            position: 'top',
+                            horizontalAlign: 'right',
                         }
-                    },
-                    colors: ['#45cb85', '#3b5de7'],
-                    dataLabels: {
-                        enabled: false,
-                    },
-                    stroke: {
-                        curve: 'smooth',
-                        width: '3',
-                        dashArray: [0, 0],
-                    },
-            
-                    markers: {
-                        size: 3
-                    },
-                    xaxis: {
-                        categories: props.details?.dates?props.details.dates.split(','):[],//['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
-                        title: {
-                            text: 'Date'
-                        }
-                    },
-            
-                    fill: {
-                        type: 'solid',
-                        opacity: [1, 0.1],
-                    },
-            
-                    legend: {
-                        position: 'top',
-                        horizontalAlign: 'right',
-                    }
-                }}
-            )
-        }
-    },[props.details]);
+                    }}
+                )
+            });
+    }
+
+    useEffect(async () => {
+        loadData();
+    },[]);
 
     return (
         <React.Fragment>
@@ -70,9 +77,9 @@ const LineChart = (props) => {
                     <div className="float-end">
                         <div className="input-group">
                             <label className="input-group-text">Sort By</label>
-                            <Input type="select" className="form-select form-select-sm">
+                            <Input type="select" className="form-select form-select-sm" onChange={(e)=>{loadData(e.target.value)}}>
                                 <option value="7">7 Days</option>
-                                <option value="30">30 Days</option>
+                                <option value="300">30 Days</option>
                             </Input>
                         </div>
                     </div>

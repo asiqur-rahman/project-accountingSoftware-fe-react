@@ -12,16 +12,10 @@ const Dashboard = () => {
 
   const [topData, setTopData] = useState(false);
   const [last5transaction, setLast5transaction] = useState(false);
-  const [expenseAccountReview, setExpenseAccountReview] = useState(false);
-  const [dashboardApex, setDashboardApex] = useState(false);
 
   useEffect(async () => {
     await Axios.get("/dashboard/topData").then((response) => { 
       setTopData(response.data[0]); });
-    await Axios.get("/dashboard/dashboardApex/7").then((response) => { 
-        setDashboardApex(response.data[0]); });
-    await Axios.get("/dashboard/expenseAccountReview").then((response) => { 
-      setExpenseAccountReview(response.data); });
     await Axios.get("/dashboard/last5transaction").then((response) => { 
         setLast5transaction(response.data.data); });
   },[]);
@@ -36,7 +30,7 @@ const Dashboard = () => {
 
               <div className="page-title-right">
                 <ol className="breadcrumb m-0">
-                  <li className="breadcrumb-item active">Welcome to BT_Solution Dashboard</li>
+                  <li className="breadcrumb-item active">Welcome to Accounting Pro Dashboard</li>
                 </ol>
               </div>
 
@@ -115,10 +109,10 @@ const Dashboard = () => {
             </Card>
           </Col>
           <Col lg={8}>
-            <LineChart details={dashboardApex}/>
+            <LineChart/>
           </Col>
           <Col lg={4}>
-            <SalesAnalytics details={expenseAccountReview}/>
+            <SalesAnalytics/>
           </Col>
           <Col lg={12}>
             <LatestTransaction transactions={last5transaction}/>
