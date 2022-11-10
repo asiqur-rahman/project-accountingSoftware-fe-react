@@ -14,8 +14,10 @@ import LanguageDropdown from "../CommonForBoth/TopbarDropdown/LanguageDropdown";
 import ProfileMenu from "../CommonForBoth/TopbarDropdown/ProfileMenu";
 
 import logoSm from "../../assets/images/logo-sm.png";
-import logoDark from "../../assets/images/logo-dark.png";
-import logoLight from "../../assets/images/logo-light.png";
+import logoDark_ from "../../assets/images/logo-dark.png";
+import logoLight_ from "../../assets/images/logo-light.png";
+import logoLight from "../../assets/images/acPro/ac.png";
+import logoDark from "../../assets/images/acPro/ac.png";
 
 //i18n
 import { withTranslation } from "react-i18next";
@@ -28,8 +30,8 @@ import {
 } from "../../store/actions";
 
 const Header = (props) => {
+  const logoHeight=60;
   const [search, setsearch] = useState(false);
-  const [megaMenu, setmegaMenu] = useState(false);
 
   function toggleFullscreen() {
     if (
@@ -140,7 +142,7 @@ const Header = (props) => {
                     <img src={logoSm} alt="" height="20" />
                   </span>
                   <span className="logo-lg">
-                    <img src={logoDark} alt="" height="19" />
+                    <img src={logoDark} alt="" height={logoHeight} />
                   </span>
                 </Link>
 
@@ -149,7 +151,7 @@ const Header = (props) => {
                     <img src={logoSm} alt="" height="20" />
                   </span>
                   <span className="logo-lg">
-                    <img src={logoLight} alt="" height="19" />
+                    <img src={logoLight} alt="" height={logoHeight} />
                   </span>
                 </Link>
               </div>
