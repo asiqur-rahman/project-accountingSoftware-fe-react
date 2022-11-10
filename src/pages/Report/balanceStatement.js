@@ -33,7 +33,7 @@ const BalanceStatement = () => {
     <>
       <div className="page-content">
 
-        <Breadcrumbs title="Char of Account" breadcrumbItem="Tree wise view" />
+        <Breadcrumbs title="Report" breadcrumbItem="Tree wise report view" />
 
         <Row>
           <Col className="col-12">
@@ -41,6 +41,7 @@ const BalanceStatement = () => {
               <CardBody>
                   <ol className="wtree">
                     {listData ? <>
+                      <Col style={{textAlign:'center', margin:"15px 0"}}><h5>Balance Sheet Report</h5></Col>
                       <li><span>Assets <p>BDT {listData.assetsTotal} Tk.</p></span>
                         <ol>
                           {listData.assetsData.map((item2,i2)=>{

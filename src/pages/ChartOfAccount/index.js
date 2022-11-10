@@ -5,6 +5,7 @@ import { Row, Col, Card, CardBody, Modal } from "reactstrap"
 import Breadcrumbs from "../../components/Common/Breadcrumb"
 import "./treeView.scss"
 import ChartOfAccountModel from "./model"
+import TableLoader from "../../components/Common/TableLoader"
 
 import Axios from "../../helpers/axios_helper"
 
@@ -15,7 +16,7 @@ const ChartOfAccount = () => {
   const selectedDataId = useRef(0);
 
   function showUpdateModal(id) {
-    selectedDataId.current = id;
+    selectedDataId.current = id; 
     setmodal_center(true);
   }
 
@@ -53,8 +54,9 @@ const ChartOfAccount = () => {
           <Col className="col-12">
             <Card>
               <CardBody>
+                {listData ? 
                   <ol className="wtree">
-                    {listData && listData.map((item1,i1)=>{
+                    {listData.map((item1,i1)=>{
                       return(
                       <li key={i1}><span>{item1.name} <p>BDT {item1['accountBalances.amount']} Tk.</p></span>
                         <ol>
@@ -88,7 +90,7 @@ const ChartOfAccount = () => {
                       )
                     })}
                   </ol>
-
+                :<TableLoader/>}
               </CardBody>
             </Card>
           </Col>
@@ -100,7 +102,7 @@ const ChartOfAccount = () => {
             centered={true}
           >
             <div className="modal-header">
-              <h5 className="modal-title mt-0">Update Bank Account</h5>
+              <h5 className="modal-title mt-0">Update Chart Of Account</h5>
               <button
                 type="button"
                 onClick={() => {

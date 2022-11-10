@@ -1,140 +1,156 @@
 import React, { useEffect, useState } from "react"
-import { Row, Col, Card, CardBody } from "reactstrap"
+import {
+  Row,
+  Col,
+  Card,
+  CardBody,
+  Button,
+  Label
+} from "reactstrap"
+import { MDBDataTable } from "mdbreact"
+
+//Import Flatepicker
+import "flatpickr/dist/themes/material_blue.css"
+import Flatpickr from "react-flatpickr"
 
 //Import Breadcrumb
 import Breadcrumbs from "../../components/Common/Breadcrumb"
 import "./treeView.scss"
-import TableLoader from "../../components/Common/TableLoader"
 import Axios from "../../helpers/axios_helper"
+const moment = require('moment');
 
-const BalanceStatement = () => {
+var tableData = {
+  columns: [
+    {
+      label: "#Sl",
+      field: "sl",
+      sort: "asc",
+      width: 150,
+    },
+    {
+      label: "Date",
+      field: "dateTime",
+      sort: "asc",
+      width: 200,
+    },
+    {
+      label: "Name",
+      field: "name",
+      sort: "asc",
+      width: 100,
+    },
+    {
+      label: "Debit",
+      field: "debit",
+      sort: "asc",
+      width: 270,
+    },
+    {
+      label: "Credit",
+      field: "credit",
+      sort: "asc",
+      width: 270,
+    }
+  ],
+  rows:[]
+};
+
+const IncomeStatement = () => {
 
   const [listData, setListData] = useState(false)
+  const [fromDateTime, setFromDateTime] = useState(moment().format("YYYY-MM-DD"))
+  const [toDateTime, setToDateTime] = useState(moment().format("YYYY-MM-DD"))
 
   const loadList =async ()=>{
-    await Axios.get("/report/balance-sheet")
+    const data={
+      fromDate:fromDateTime,
+      todate:toDateTime
+    }
+    await Axios.post("/report/custom-report",data)
     .then((response) => { 
       if(response.data.status===200){
-        setListData(response.data.data);
+        tableData.rows=response.data.data;
+        setListData(tableData);
       }
       else{
-        setListData([])
+        setListData(false)
       }
     }).catch(e=>{
-      setListData([])
+      setListData(false)
     })
   }
 
-  useEffect(async () => {
-    loadList();
-  },[]);
+  // useEffect(async () => {
+  //   loadList();
+  // },[]);
 
   return (
     <>
       <div className="page-content">
 
-        <Breadcrumbs title="Char of Account" breadcrumbItem="Tree wise view" />
+        <Breadcrumbs title="Report" breadcrumbItem="Tree wise report view" />
 
         <Row>
           <Col className="col-12">
             <Card>
               <CardBody>
-                  <ol className="wtree">
-                    {listData ? <>
-                      <li><span>Assets <p>BDT {listData.assetsTotal} Tk.</p></span>
-                        <ol>
-                          {listData.assetsData.map((item2,i2)=>{
-                            return (
-                              <li key={i2}>
-                                <span>{item2.name} <p>BDT {item2['accountBalances.amount']} Tk.</p></span>
-                                  <ol>
-                                    {item2.childs && item2.childs.map((item3,i3)=>{
-                                      return (
-                                        <li key={i3}>
-                                          <span>{item3.name} <p>BDT {item3['accountBalances.amount']} Tk.</p></span>
-                                          <ol>
-                                            {item3.childs && item3.childs.map((item4,i4)=>{
-                                              return (
-                                                <li key={i4}>
-                                                  <span>{item4.name} <p>BDT {item4['accountBalances.amount']} Tk.</p></span>
-                                                </li>
-                                              )
-                                            })}
-                                          </ol>
-                                        </li>
-                                      )
-                                    })}
-                                  </ol>
-                            </li>
-                            )
-                          })}
-                        </ol>
-                      </li>
-
-                      <li><span>Liabilities <p>BDT {listData.liabilitiesTotal} Tk.</p></span>
-                      <ol>
-                        {listData.liabilitiesData.map((item2,i2)=>{
-                          return (
-                            <li key={i2}>
-                              <span>{item2.name} <p>BDT {item2['accountBalances.amount']} Tk.</p></span>
-                                <ol>
-                                  {item2.childs && item2.childs.map((item3,i3)=>{
-                                    return (
-                                      <li key={i3}>
-                                        <span>{item3.name} <p>BDT {item3['accountBalances.amount']} Tk.</p></span>
-                                        <ol>
-                                          {item3.childs && item3.childs.map((item4,i4)=>{
-                                            return (
-                                              <li key={i4}>
-                                                <span>{item4.name} <p>BDT {item4['accountBalances.amount']} Tk.</p></span>
-                                              </li>
-                                            )
-                                          })}
-                                        </ol>
-                                      </li>
-                                    )
-                                  })}
-                                </ol>
-                          </li>
-                          
-                          )
-                        })}
-                      </ol>
-                      </li>
-
-                      <li><span>Equities <p>BDT {listData.equitiesTotal} Tk.</p></span>
-                      <ol>
-                        {listData.equitiesData.map((item2,i2)=>{
-                          return (
-                            <li key={i2}>
-                              <span>{item2.name} <p>BDT {item2['accountBalances.amount']} Tk.</p></span>
-                                <ol>
-                                  {item2.childs && item2.childs.map((item3,i3)=>{
-                                    return (
-                                      <li key={i3}>
-                                        <span>{item3.name} <p>BDT {item3['accountBalances.amount']} Tk.</p></span>
-                                        <ol>
-                                          {item3.childs && item3.childs.map((item4,i4)=>{
-                                            return (
-                                              <li key={i4}>
-                                                <span>{item4.name} <p>BDT {item4['accountBalances.amount']} Tk.</p></span>
-                                              </li>
-                                            )
-                                          })}
-                                        </ol>
-                                      </li>
-                                    )
-                                  })}
-                                </ol>
-                          </li>
-                          
-                          )
-                        })}
-                      </ol>
-                    </li>
-                    </>: <TableLoader/>
-                    }
-                  </ol>
+                <Row>
+                  <Col md="5">
+                    <div className="mb-3">
+                        <Label>From Date</Label>
+                        <Flatpickr
+                                name="dateTime"
+                                className="form-control d-block"
+                                placeholder="dd M, yyyy"
+                                options={{
+                                    altInput: true,
+                                    altFormat: "F j, Y",
+                                    dateFormat: "Y-m-d",
+                                    defaultDate: "today"
+                                }}
+                                onChange={(selectedDates, dateStr, instance) => {
+                                // const firstDate = selectedDates[0];
+                                // console.log({ firstDate, dateStr });
+                                setFromDateTime(dateStr);
+                            }}
+                        />
+                    </div>
+                  </Col>
+                  <Col md="5">
+                    <div className="mb-3">
+                        <Label>To Date</Label>
+                        <Flatpickr
+                                name="dateTime"
+                                className="form-control d-block"
+                                placeholder="dd M, yyyy"
+                                options={{
+                                    altInput: true,
+                                    altFormat: "F j, Y",
+                                    dateFormat: "Y-m-d",
+                                    defaultDate: "today"
+                                }}
+                                onChange={(selectedDates, dateStr, instance) => {
+                                // const firstDate = selectedDates[0];
+                                // console.log({ firstDate, dateStr });
+                                setToDateTime(dateStr);
+                            }}
+                        />
+                    </div>
+                  </Col>
+                  <Col style={{textAlign: 'right'}}>
+                    <Button color="primary" onClick={()=>loadList()} type="button" style={{position:'absolute',bottom:'17%',right:'10%'}}>
+                        Search
+                    </Button>
+                  </Col>
+                </Row>
+                  
+                {listData &&
+                  <MDBDataTable 
+                  responsive 
+                  striped 
+                  bordered 
+                  data={listData} />
+                }
 
               </CardBody>
             </Card>
@@ -146,4 +162,4 @@ const BalanceStatement = () => {
   )
 }
 
-export default BalanceStatement
+export default IncomeStatement

@@ -174,7 +174,7 @@ const SidebarContent = props => {
                   <Link to="/balance-sheet">{props.t("Balance Sheet")} </Link>
                 </li>
                 <li>
-                  <Link to="/filter-record">{props.t("Filter Record")} </Link>
+                  <Link to="/custom-report">{props.t("Filter Report")} </Link>
                 </li>
               </ul>
             </li>
