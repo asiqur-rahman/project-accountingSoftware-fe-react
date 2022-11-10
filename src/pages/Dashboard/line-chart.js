@@ -76,7 +76,7 @@ const LineChart = () => {
                 <CardBody>
                     <div className="float-end">
                         <div className="input-group">
-                            <label className="input-group-text">Sort By</label>
+                            <label className="input-group-text" style={{marginTop:'0'}}>Sort By</label>
                             <Input type="select" className="form-select form-select-sm" onChange={(e)=>{loadData(e.target.value)}}>
                                 <option value="7">7 Days</option>
                                 <option value="300">30 Days</option>
