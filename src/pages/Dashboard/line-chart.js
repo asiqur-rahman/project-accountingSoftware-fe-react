@@ -79,7 +79,9 @@ const LineChart = () => {
                             <label className="input-group-text" style={{marginTop:'0'}}>Sort By</label>
                             <Input type="select" className="form-select form-select-sm" onChange={(e)=>{loadData(e.target.value)}}>
                                 <option value="7">7 Days</option>
-                                <option value="300">30 Days</option>
+                                <option value="30">30 Days</option>
+                                <option value="60">60 Days</option>
+                                <option value="90">90 Days</option>
                             </Input>
                         </div>
                     </div>

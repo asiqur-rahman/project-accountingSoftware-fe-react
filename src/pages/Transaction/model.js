@@ -30,49 +30,47 @@ const Model = (props) => {
   const [allAccounts, setAllAccounts] = useState([])
   const [dateTime, setDateTime] = useState(moment().format("YYYY-MM-DD"))
   const [transactionDetails, setTransactionDetails] = useState([])
+  const [transactionDetailsUpdateTime, setTransactionDetailsUpdateTime] = useState(0)
   const [updateData, setUpdateData] = useState(false)
   const [isItIncome, setIsItIncome] = useState(false)
 
     function handleRemoveRow(e, id) {
         if (typeof id != "undefined") {
-            document.getElementById("repeater" + id).innerHTML = ""
+            // document.getElementById("repeater" + id).innerHTML = ""
             const filteredTransactionDetails=transactionDetails.filter(x=>x.chartOfAccountId!=transactionDetails[id].chartOfAccountId);
             setTransactionDetails(filteredTransactionDetails)
         }
     }
 
-    // chartOfAccountId:item.chartOfAccountId,
-    // taxId:item.taxId,
-    // debit:item.debit,
-    // credit:item.credit,
-    // transactionId:data.id
-
     const amountChangeEvent = (value) =>{
+        // return false;
         var oldTransactionDetails =transactionDetails;
         var selectedIdFound=false;
 
         oldTransactionDetails.map(item=>{
             if(item.chartOfAccountId==accountFromId){
-                item.debit='';//parseInt(value);
+                item.debit=parseInt(value);
                 item.credit='';
                 selectedIdFound=true;
             }
         })
 
-        if(!selectedIdFound)oldTransactionDetails=[...oldTransactionDetails,{chartOfAccountId:accountFromId,debit:'',credit:''}]
+        if(!selectedIdFound)oldTransactionDetails=[...oldTransactionDetails,{chartOfAccountId:accountFromId,debit:parseInt(value),credit:''}]
 
         selectedIdFound=false;
         oldTransactionDetails.map(item=>{
             if(item.chartOfAccountId==accountToId){
-                item.credit='';//parseInt(value);
+                item.credit=parseInt(value);
                 item.debit='';
                 selectedIdFound=true;
             }
         })
 
-        if(!selectedIdFound)oldTransactionDetails=[...oldTransactionDetails,{chartOfAccountId:accountToId,debit:'',credit:''}]
+        if(!selectedIdFound)oldTransactionDetails=[...oldTransactionDetails,{chartOfAccountId:accountToId,debit:'',credit:parseInt(value)}]
         
+        // setTransactionDetails([])
         setTransactionDetails(oldTransactionDetails)
+        setTransactionDetailsUpdateTime(transactionDetailsUpdateTime+1)
     }
 
     const transactionTypeChangeHandler = async (value) => {
@@ -137,10 +135,11 @@ const Model = (props) => {
     const transactionDetailsChangeEvent = (id,name,value) => {
         transactionDetails.map((item,index)=>{
             if(index==id){
-                item[name]=value;
+                item[name]=value
             }
         });
-        setTransactionDetails(transactionDetails);
+        setTransactionDetails(transactionDetails)
+        setTransactionDetailsUpdateTime(transactionDetailsUpdateTime+1)
     }
 
     useEffect(async () => {
@@ -303,17 +302,17 @@ const Model = (props) => {
                                             <label>Debit</label>
                                             <input type="number" name="debit" className="form-control" 
                                             onChange={(e)=>{transactionDetailsChangeEvent(idx,"debit",e.target.value);}}
-                                            defaultValue={item.debit}/>
+                                            value={item.debit}/>
                                         </div>
 
                                         <div className="mb-3 col-lg-3">
                                             <label htmlFor="subject">Credit</label>
                                             <input type="number" name="credit" className="form-control"
                                             onChange={(e)=>{transactionDetailsChangeEvent(idx,"credit",e.target.value);}}
-                                            defaultValue={item.credit}/>
+                                            value={item.credit}/>
                                         </div>
 
-                                        <Col lg={1} className="align-self-center mt-2">
+                                        <Col lg={1} className="align-self-center mt-4">
                                             <button
                                                 data-repeater-delete
                                                 type="button"
