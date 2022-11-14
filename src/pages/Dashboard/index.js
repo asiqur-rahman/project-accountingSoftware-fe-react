@@ -30,7 +30,7 @@ const Dashboard = () => {
 
               <div className="page-title-right">
                 <ol className="breadcrumb m-0">
-                  <li className="breadcrumb-item active">Welcome to Accounting Pro Dashboard</li>
+                  <li className="breadcrumb-item active">Welcome to e-Accounting360 Dashboard</li>
                 </ol>
               </div>
 

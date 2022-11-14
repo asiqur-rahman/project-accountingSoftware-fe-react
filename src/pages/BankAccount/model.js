@@ -29,7 +29,7 @@ const Model = (props) => {
             props.handleCallback(response.data)
         })
         .catch((e)=>{
-            alert(e.message)
+            console.log(e.message)
         })
     }
     else{
@@ -38,7 +38,7 @@ const Model = (props) => {
         if(response.data.status===201){
             history.push("/bank-account-list");
         }else{
-            alert(response.data.message)
+            console.log(response.data.message)
         }
         })
         .catch((e)=>{
@@ -119,7 +119,7 @@ const Model = (props) => {
                                 name="description"
                                 defaultValue={updateData.description}
                                 placeholder="Description"
-                                type="text"
+                                type="textarea"
                                 className="form-control"
                                 id="validationCustom05"
                             />

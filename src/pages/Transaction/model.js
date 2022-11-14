@@ -271,8 +271,8 @@ const Model = (props) => {
                             <AvField
                                 name="description"
                                 defaultValue={updateData.description}
-                                placeholder=" "
-                                type="text"
+                                placeholder="Description"
+                                type="textarea"
                                 className="form-control"
                                 errorMessage="Please provide description."
                                 validate={{ required: { value: true } }}

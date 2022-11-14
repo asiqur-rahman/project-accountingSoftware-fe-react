@@ -36,7 +36,7 @@ const Model = (props) => {
             props.handleCallback(response.data)
         })
         .catch((e)=>{
-            alert(e.message)
+            console.log(e.message)
         })
     }
     else{
@@ -45,7 +45,7 @@ const Model = (props) => {
         if(response.data.status===201){
             history.push("/cheque-list");
         }else{
-            alert(response.data.message)
+            console.log(response.data.message)
         }
         })
         .catch((e)=>{
@@ -155,9 +155,11 @@ const Model = (props) => {
                             <AvField
                             name="description"
                             defaultValue={updateData.description}
-                            placeholder=" "
-                            type="text"
+                            placeholder="Description"
+                            type="textarea"
                             className="form-control"
+                            validate={{ required: { value: true } }}
+                            errorMessage=" Please provide description."
                             id="validationCustom05"
                             />
                         </div>

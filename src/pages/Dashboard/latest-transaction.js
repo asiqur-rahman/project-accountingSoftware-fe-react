@@ -72,7 +72,7 @@ const LatestTransaction = ( props ) => {
         <Col lg={12}>
             <Card>
                 <CardBody>
-                    <CardTitle className="h4 mb-4">Latest 7 Transactions</CardTitle>
+                    <CardTitle className="h4 mb-4">Latest 7 Transactions (<Link to="/transaction-list">View All</Link>)</CardTitle>
                     <div className="table-responsive">
                         <Table className="table-centered">
                             <thead>

@@ -8,7 +8,7 @@ import { Container, Row, Col, CardBody, Card, Button } from "reactstrap"
 
 // import images
 import logo from "../../assets/images/logo-sm-dark.png"
-import avatar1 from "../../assets/images/users/avatar-1.jpg"
+import avatar1 from "../../assets/images/users/avatar.png"
 
 const LockScreen = () => {
   return (

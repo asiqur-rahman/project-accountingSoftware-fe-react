@@ -33,7 +33,7 @@ const BalanceStatement = () => {
     <>
       <div className="page-content">
 
-        <Breadcrumbs title="Report" breadcrumbItem="Tree wise report view" />
+        <Breadcrumbs title="Report" breadcrumbItem="Balance Sheet Report" />
 
         <Row>
           <Col className="col-12">

@@ -48,7 +48,7 @@ const ChartOfAccount = () => {
     <>
       <div className="page-content">
 
-        <Breadcrumbs title="Char of Account" breadcrumbItem="Tree wise view" />
+        <Breadcrumbs title="Char of Account" breadcrumbItem="Char of Account List" />
 
         <Row>
           <Col className="col-12">
@@ -58,22 +58,22 @@ const ChartOfAccount = () => {
                   <ol className="wtree">
                     {listData.map((item1,i1)=>{
                       return(
-                      <li key={i1}><span>{item1.name} <p>BDT {item1['accountBalances.amount']} Tk.</p></span>
+                      <li key={i1}><span>{item1.name} <p> {item1['accountBalances.amount']} Tk.</p></span>
                         <ol>
                           {item1.childs && item1.childs.map((item2,i2)=>{
                             return (
                               <li key={i2}>
-                                <span>{item2.name} (<button onClick={() => showUpdateModal(item2.id)} style={{background:"none",border:"none",padding:"0",margin:"0",fontWeight:"bold",color:"blue"}}>Edit</button>)<p>BDT {item2['accountBalances.amount']} Tk.</p></span>
+                                <span>{item2.name} (<button onClick={() => showUpdateModal(item2.id)} style={{background:"none",border:"none",padding:"0",margin:"0",fontWeight:"bold",color:"blue"}}>Edit</button>)<p> {item2['accountBalances.amount']} Tk.</p></span>
                                   <ol>
                                     {item2.childs && item2.childs.map((item3,i3)=>{
                                       return (
                                         <li key={i3}>
-                                          <span>{item3.name} (<button onClick={() => showUpdateModal(item3.id)} style={{background:"none",border:"none",padding:"0",margin:"0",fontWeight:"bold",color:"blue"}}>Edit</button>)<p>BDT {item3['accountBalances.amount']} Tk.</p></span>
+                                          <span>{item3.name} (<button onClick={() => showUpdateModal(item3.id)} style={{background:"none",border:"none",padding:"0",margin:"0",fontWeight:"bold",color:"blue"}}>Edit</button>)<p> {item3['accountBalances.amount']} Tk.</p></span>
                                           <ol>
                                             {item3.childs && item3.childs.map((item4,i4)=>{
                                               return (
                                                 <li key={i4}>
-                                                  <span>{item4.name} (<button onClick={() => showUpdateModal(item4.id)} style={{background:"none",border:"none",padding:"0",margin:"0",fontWeight:"bold",color:"blue"}}>Edit</button>)<p>BDT {item4['accountBalances.amount']} Tk.</p></span>
+                                                  <span>{item4.name} (<button onClick={() => showUpdateModal(item4.id)} style={{background:"none",border:"none",padding:"0",margin:"0",fontWeight:"bold",color:"blue"}}>Edit</button>)<p> {item4['accountBalances.amount']} Tk.</p></span>
                                                 </li>
                                               )
                                             })}

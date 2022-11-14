@@ -9,7 +9,7 @@ import SidebarContent from "./SidebarContent"
 
 import * as Session from "../../helpers/session_helper"
 
-import avatar2 from "../../assets/images/users/avatar-2.jpg"
+import avatar2 from "../../assets/images/users/avatar.png"
 
 const Sidebar = (props) => {
 

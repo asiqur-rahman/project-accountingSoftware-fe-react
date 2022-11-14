@@ -29,18 +29,6 @@ import UserCreate from "../pages/User/create"
 // Pages Calendar
 import Calendar from "../pages/Calendar/index"
 
-// //Tasks
-import TasksList from "../pages/Tasks/tasks-list"
-import TasksKanban from "../pages/Tasks/tasks-kanban"
-import TasksCreate from "../pages/Tasks/tasks-create"
-
-//Email
-import EmailInbox from "../pages/Email/email-inbox"
-import EmailRead from "../pages/Email/email-read"
-import EmailBasicTemplte from "../pages/Email/email-basic-templte"
-import EmailAlertTemplte from "../pages/Email/email-template-alert"
-import EmailTemplateBilling from "../pages/Email/email-template-billing"
-
 //Pages
 import PagesStarter from "../pages/Utility/pages-starter"
 import PagesMaintenance from "../pages/Utility/pages-maintenance"
@@ -154,13 +142,6 @@ const userRoutes = [
   { path: "/user", component: UserCreate },
   { path: "/user-list", component: UserIndex },
 
-  //Email
-  { path: "/email-inbox", component: EmailInbox },
-  { path: "/email-read", component: EmailRead },
-  { path: "/email-template-basic", component: EmailBasicTemplte },
-  { path: "/email-template-alert", component: EmailAlertTemplte },
-  { path: "/email-template-billing", component: EmailTemplateBilling },
-
   //Utility
   { path: "/pages-starter", component: PagesStarter },
   { path: "/pages-timeline", component: PagesTimeline },
@@ -214,12 +195,6 @@ const userRoutes = [
   { path: "/e-charts", component: EChart },
   { path: "/sparkline-charts", component: SparklineChart },
   { path: "/charts-knob", component: ChartsKnob },
-
-
-  // Tasks
-  { path: "/tasks-list", component: TasksList },
-  { path: "/tasks-kanban", component: TasksKanban },
-  { path: "/tasks-create", component: TasksCreate },
 
   // Icons
   { path: "/icons-unicons", component: IconUnicons },

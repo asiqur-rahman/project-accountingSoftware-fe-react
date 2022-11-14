@@ -40,7 +40,7 @@ const ExpenseAnalysis = ( props ) => {
       <>
         <Card>
           <CardBody>
-            <h4 className="card-title mb-4">Expense Review</h4>
+            <h4 className="card-title mb-4">Expense Overview</h4>
 
             <Row className="align-items-center" style={{minHeight:analysis?"260px":"0px"}}>
               <Col sm={12}>

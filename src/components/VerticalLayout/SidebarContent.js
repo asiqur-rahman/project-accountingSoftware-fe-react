@@ -90,7 +90,8 @@ const SidebarContent = props => {
 
             <li>
               <Link to="/dashboard" className=" waves-effect">
-                <i className="mdi mdi-airplay"></i><span className="badge rounded-pill bg-info float-end">new</span>
+                <i className="mdi mdi-airplay"></i>
+                {/* <span className="badge rounded-pill bg-info float-end">new</span> */}
                 <span>{props.t("Dashboard")}</span>
               </Link>
             </li>
@@ -99,12 +100,12 @@ const SidebarContent = props => {
 
             <li>
               <Link to="/#" className="has-arrow waves-effect">
-                <i className="mdi mdi-inbox-full"></i>
+                <i className="mdi mdi-clipboard-account"></i>
                 <span>{props.t("Chart of Account")}</span>
               </Link>
               <ul className="sub-menu">
                 <li>
-                  <Link to="/chart-of-account">{props.t("Chart of account")}</Link>
+                  <Link to="/chart-of-account">{props.t("New Char of Account")}</Link>
                 </li>
                 <li>
                   <Link to="/chart-of-account-list">{props.t("List of Chart of account")} </Link>
@@ -114,7 +115,7 @@ const SidebarContent = props => {
 
             <li>
               <Link to="/#" className="has-arrow waves-effect">
-                <i className="mdi mdi-inbox-full"></i>
+                <i className="mdi mdi-coin"></i>
                 <span>{props.t("Transaction")}</span>
               </Link>
               <ul className="sub-menu">
@@ -131,7 +132,7 @@ const SidebarContent = props => {
 
             <li>
               <Link to="/#" className="has-arrow waves-effect">
-                <i className="mdi mdi-inbox-full"></i>
+                <i className="mdi mdi-bank"></i>
                 <span>{props.t("Bank Account")}</span>
               </Link>
               <ul className="sub-menu">
@@ -146,7 +147,7 @@ const SidebarContent = props => {
 
             <li>
               <Link to="/#" className="has-arrow waves-effect">
-                <i className="mdi mdi-inbox-full"></i>
+                <i className="mdi mdi-format-list-bulleted"></i>
                 <span>{props.t("Cheque Record")}</span>
               </Link>
               <ul className="sub-menu">
@@ -174,7 +175,7 @@ const SidebarContent = props => {
                   <Link to="/balance-sheet">{props.t("Balance Sheet")} </Link>
                 </li>
                 <li>
-                  <Link to="/custom-report">{props.t("Filter Report")} </Link>
+                  <Link to="/custom-report">{props.t("Daily Transaction")} </Link>
                 </li>
               </ul>
             </li>

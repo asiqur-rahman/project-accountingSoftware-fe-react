@@ -28,7 +28,7 @@ const ConfirmMail = () => {
                     className="auth-logo-light mx-auto"
                   />
                 </Link>
-                <p className="mt-3">Accounting Pro</p>
+                <p className="mt-3">e-Accounting360</p>
               </div>
             </Col>
           </Row>

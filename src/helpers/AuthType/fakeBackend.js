@@ -5,8 +5,7 @@ import accessToken from "../jwt-token-access/accessToken"
 
 import {
   calenderDefaultCategories,
-  events,
-  tasks,
+  events
 } from "../../common/data"
 
 let users = [
@@ -265,18 +264,6 @@ mock.onPost(url.POST_FAKE_REGISTER).reply(config => {
     })
   })
 
-  mock.onGet(url.GET_TASKS).reply(() => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (tasks) {
-          // Passing fake JSON data as response
-          resolve([200, tasks])
-        } else {
-          reject([400, "Cannot get tasks"])
-        }
-      })
-    })
-  })
 
   mock.onGet(url.GET_EVENTS).reply(() => {
     return new Promise((resolve, reject) => {
