@@ -1,20 +1,24 @@
 import PropTypes from "prop-types"
-import React from "react"
+import React,{useState, useEffect} from "react"
 import { connect } from "react-redux"
 import { withRouter, Link } from "react-router-dom"
 
 //i18n
 import { withTranslation } from "react-i18next"
-import SidebarContent from "./SidebarContent"
-
-import * as Session from "../../helpers/session_helper"
+import AdminSidebarContent from "./SidebarContent/AdminSidebarContent"
+import UserSidebarContent from "./SidebarContent/UserSidebarContent"
 
 import avatar2 from "../../assets/images/users/avatar.png"
+import * as Session from "../../helpers/session_helper"
 
 const Sidebar = (props) => {
 
-  var ancsd=Session.getUser();
-  var ancd=Session.getUser().full_name;
+  const [adminUser, setAdminUser ]=useState(false);
+
+  useEffect(() => {
+    const sessionUser=Session.getUser()
+    if(sessionUser && sessionUser.role_code==='1') setAdminUser(true)
+  }, []);
 
   return (
     <>
@@ -31,7 +35,10 @@ const Sidebar = (props) => {
               </div>
             </div>
             <div data-simplebar className="h-100">
-            {props.type !== "condensed" ? <SidebarContent /> : <SidebarContent />}
+            {adminUser ? 
+            props.type !== "condensed" ? <AdminSidebarContent /> : <AdminSidebarContent />
+            : 
+            props.type !== "condensed" ? <UserSidebarContent /> : <UserSidebarContent />}
           </div>
           </div>
         </div>

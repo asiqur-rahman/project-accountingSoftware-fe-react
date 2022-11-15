@@ -8,14 +8,12 @@ import SimpleBar from "simplebar-react"
 import MetisMenu from "metismenujs"
 import { withRouter } from "react-router-dom"
 import { Link } from "react-router-dom"
-import * as Session from "../../helpers/session_helper"
 
 //i18n
 import { withTranslation } from "react-i18next"
 
 const SidebarContent = props => {
   const ref = useRef()
-  const [adminUser, setAdminUser ]=useState(false);
   const activateParentDropdown = useCallback((item) => {
     item.classList.add("active")
     const parent = item.parentElement
@@ -71,8 +69,6 @@ const SidebarContent = props => {
   }, [props.location.pathname, activateParentDropdown])
 
   useEffect(() => {
-    const sessionUser=Session.getUser()
-    if(sessionUser && sessionUser.role_code==='1') setAdminUser(true)
     ref.current.recalculate()
   }, []);
 
@@ -88,7 +84,7 @@ const SidebarContent = props => {
   
 
   return (
-    <React.Fragment>
+    <>
       <SimpleBar ref={ref} className="vertical-simplebar">
         <div id="sidebar-menu">
           <ul className="metismenu list-unstyled" id="side-menu">
@@ -104,7 +100,6 @@ const SidebarContent = props => {
 
             <li className="menu-title">{props.t("Account")}</li>
 
-            {adminUser &&
             <li>
               <Link to="/#" className="has-arrow waves-effect">
                 <i className="mdi mdi-clipboard-account"></i>
@@ -119,7 +114,6 @@ const SidebarContent = props => {
                 </li>
               </ul>
             </li>
-            }
 
             <li>
               <Link to="/#" className="has-arrow waves-effect">
@@ -138,7 +132,6 @@ const SidebarContent = props => {
 
             <li className="menu-title">{props.t("Cheque")}</li>
 
-            {adminUser &&
             <li>
               <Link to="/#" className="has-arrow waves-effect">
                 <i className="mdi mdi-bank"></i>
@@ -153,7 +146,6 @@ const SidebarContent = props => {
                 </li>
               </ul>
             </li>
-            }
 
             <li>
               <Link to="/#" className="has-arrow waves-effect">
@@ -190,7 +182,6 @@ const SidebarContent = props => {
               </ul>
             </li>
 
-            {adminUser && <>
             <li className="menu-title">{props.t("User")}</li>
 
             <li>
@@ -207,7 +198,6 @@ const SidebarContent = props => {
                 </li>
               </ul>
             </li>
-            </>}
 
             {/* <li className="menu-title">{props.t("Other")}</li>
 
@@ -526,7 +516,7 @@ const SidebarContent = props => {
           </ul>
         </div>
       </SimpleBar>
-    </React.Fragment>
+    </>
   )
 }
 

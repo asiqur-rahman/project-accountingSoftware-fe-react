@@ -152,6 +152,8 @@ const DatatableTables = () => {
                   responsive 
                   striped 
                   bordered 
+                  hover
+                  noBottomColumns={true} 
                   data={listData} />
                   :
                   <TableLoader/>

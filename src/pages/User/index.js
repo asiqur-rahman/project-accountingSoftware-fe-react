@@ -181,9 +181,11 @@ const DatatableTables = () => {
               <CardBody>
                 {listData ?
                   <MDBDataTable 
-                  responsive 
+                  responsive
                   striped 
                   bordered 
+                  hover
+                  noBottomColumns={true} 
                   data={listData} />
                   :
                   <TableLoader/>

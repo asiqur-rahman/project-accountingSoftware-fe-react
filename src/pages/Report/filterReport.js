@@ -149,6 +149,9 @@ const IncomeStatement = () => {
                   responsive 
                   striped 
                   bordered 
+                  hover
+                  noBottomColumns={true}
+                  autoResetPage={false}
                   data={listData} />
                 }
 

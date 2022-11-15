@@ -157,6 +157,8 @@ const DatatableTables = () => {
                   responsive 
                   striped 
                   bordered 
+                  hover
+                  noBottomColumns={true} 
                   data={listData} />
                   :
                   <TableLoader/>
@@ -192,6 +194,8 @@ const DatatableTables = () => {
                   responsive 
                   striped 
                   bordered 
+                  hover
+                  noBottomColumns={true} 
                   data={transactionDetails} />
                   :
                   <TableLoader/>

@@ -524,7 +524,12 @@ const DatatableTables = () => {
                   <code>&lt;MDBDataTable /&gt;</code>.
                   </CardSubtitle>
 
-                <MDBDataTable responsive bordered data={data} />
+                <MDBDataTable 
+                responsive 
+                hover
+                noBottomColumns={true} 
+                bordered 
+                data={data} />
               </CardBody>
             </Card>
           </Col>
@@ -542,7 +547,13 @@ const DatatableTables = () => {
                   <code>&lt;MDBDataTable striped /&gt;</code>.
                   </CardSubtitle>
 
-                <MDBDataTable responsive striped bordered data={data} />
+                <MDBDataTable 
+                  responsive
+                  striped
+                  bordered 
+                  hover
+                  noBottomColumns={true} 
+                  data={data} />
               </CardBody>
             </Card>
           </Col>
