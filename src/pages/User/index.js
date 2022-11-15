@@ -8,7 +8,7 @@ import "./datatables.scss"
 import TableLoader from "../../components/Common/TableLoader"
 import Axios from "../../helpers/axios_helper"
 import UserModal from "./model"
-import CustomModal from "../Common/Modal"
+import CustomModal from "../Common/CustomModal"
 
 var tabledata = {
   columns: [
@@ -74,6 +74,11 @@ const DatatableTables = () => {
     selectedId.current=0;
     setmodal_center(false);
     loadList();
+  }
+
+  const deleteConfirmation = (result) =>{
+    setDelete_modal_center(false);
+    alert(result)
   }
 
   const loadList = async () =>{
@@ -175,7 +180,7 @@ const DatatableTables = () => {
             </div>
           </Modal>
 
-          {/* <CustomModal modelShow={delete_modal_center} handleCallback={handleCallback}/> */}
+          <CustomModal modelShow={delete_modal_center} handleCallback={deleteConfirmation}/>
           <Modal
             size="lg"
             isOpen={modal_center}

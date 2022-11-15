@@ -6,7 +6,8 @@ import {
   Card,
   CardBody,
   Button,
-  Label
+  Label,
+  Modal
 } from "reactstrap"
 import { AvForm, AvField } from "availity-reactstrap-validation"
 
@@ -17,11 +18,12 @@ import TableLoader from "../../components/Common/TableLoader"
 import Axios from "../../helpers/axios_helper"
 import { useHistory  } from "react-router-dom"
 
-const Modal = (props) => {
+const CustomModal = (props) => {
   const history = useHistory()
   const [modal_center, setmodal_center] = useState(false)
 
   const submitEvent = (response) => {
+    setmodal_center(false);
     props.handleCallback(response)
   }
 
@@ -80,4 +82,4 @@ const Modal = (props) => {
   )
 }
 
-export default Modal
+export default CustomModal
