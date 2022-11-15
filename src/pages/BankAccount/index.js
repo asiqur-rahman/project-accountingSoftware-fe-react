@@ -8,6 +8,7 @@ import "./datatables.scss"
 import Axios from "../../helpers/axios_helper"
 import TableLoader from "../../components/Common/TableLoader"
 import BankAccountModel from "./model"
+import CustomModal from "../Common/CustomModal"
 
 var tabledata = {
   columns: [
@@ -54,20 +55,38 @@ var tabledata = {
 const DatatableTables = () => {
 
   const [listData, setListData] = useState(false)
-
+  const [delete_modal_center, setDelete_modal_center] = useState(false)
   const [modal_center, setmodal_center] = useState(false)
-  const selectedCheque = useRef(0)
+  const selectedItem = useRef(0)
 
   function showUpdateModal(id) {
-    selectedCheque.current = id;
+    selectedItem.current = id;
     setmodal_center(true);
   }
 
   const handleCallback = (details) =>{
-    selectedCheque.current=0;
+    selectedItem.current=0;
     setmodal_center(false);
     // alert(details.message)
     loadList();
+  }
+
+  const modalCallback = async (result) =>{
+    if(result){
+      const status=selectedItem.current.status==1?0:1
+      await Axios.patch(`/bank-account/changeStatus/${selectedItem.current.id}/${status}`)
+        .then((response) => {
+        if(response.data.status===200){
+          loadList()
+        }else{
+          alert(response.data.message)
+        }
+        })
+        .catch((e)=>{
+            var e=e
+        })
+    }
+    setDelete_modal_center(false);
   }
 
   const loadList = async () =>{
@@ -77,8 +96,8 @@ const DatatableTables = () => {
       if(response.data.status===200){
         response.data.data.map((item, index) => {
           item.action = (
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <div
+            <div style={{ display: "flex" }} className="customBtnArea">
+              <button
                 className="uil-trash-alt btn-primary"
                 style={{
                   cursor: "pointer",
@@ -88,9 +107,21 @@ const DatatableTables = () => {
                   borderRadius: ".3rem"
                 }}
                 onClick={() => showUpdateModal(item.id)}
-              >
-                Details
-              </div>
+              >Edit
+              </button>
+              
+              <button
+                className="uil-trash-alt btn-danger"
+                style={{
+                  cursor: "pointer",
+                  color: "white",
+                  fontSize: ".7em",
+                  padding: ".3rem",
+                  borderRadius: ".3rem"
+                }}
+                onClick={() => {selectedItem.current={id:item.id,status:item.isActive}; setDelete_modal_center(true);}}
+              >Delete
+              </button>
             </div>
           );
         });
@@ -121,7 +152,6 @@ const DatatableTables = () => {
                   responsive 
                   striped 
                   bordered 
-                  loading
                   data={listData} />
                   :
                   <TableLoader/>
@@ -151,9 +181,11 @@ const DatatableTables = () => {
               </button>
             </div>
             <div className="modal-body" style={{padding:"0"}}>
-              <BankAccountModel id={selectedCheque.current} handleCallback={handleCallback}/>
+              <BankAccountModel id={selectedItem.current} handleCallback={handleCallback}/>
             </div>
           </Modal>
+
+          <CustomModal modelShow={delete_modal_center} handleCallback={modalCallback}/>
         </Col>
       </div>
 

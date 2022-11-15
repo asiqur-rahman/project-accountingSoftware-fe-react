@@ -63,22 +63,34 @@ const DatatableTables = () => {
   const [listData, setListData] = useState(false)
   const [modal_center, setmodal_center] = useState(false)
   const [delete_modal_center, setDelete_modal_center] = useState(false)
-  const selectedId = useRef(0)
+  const selectedItem = useRef(0)
 
   function showUpdateModal(id) {
-    selectedId.current = id;
+    selectedItem.current = id;
     setmodal_center(true);
   }
 
   const handleCallback = (details) =>{
-    selectedId.current=0;
+    selectedItem.current=0;
     setmodal_center(false);
     loadList();
   }
 
-  const deleteConfirmation = (result) =>{
+  const modalCallback = async (result) =>{
+    if(result){
+      await Axios.patch(`/user/changeStatus/${selectedItem.current}`)
+        .then((response) => {
+        if(response.data.status===200){
+          loadList()
+        }else{
+          alert(response.data.message)
+        }
+        })
+        .catch((e)=>{
+            var e=e
+        })
+    }
     setDelete_modal_center(false);
-    alert(result)
   }
 
   const loadList = async () =>{
@@ -88,8 +100,8 @@ const DatatableTables = () => {
       if(response.data.status===200){
         response.data.data.map((item, index) => {
           item.action = (
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <div
+            <div style={{ display: "flex" }} className="customBtnArea">
+              <button
                 className="uil-trash-alt btn-primary"
                 style={{
                   cursor: "pointer",
@@ -99,22 +111,21 @@ const DatatableTables = () => {
                   borderRadius: ".3rem"
                 }}
                 onClick={() => showUpdateModal(item.id)}
-              >Details
-              </div>
+              >Edit
+              </button>
 
-              <div
-                className="uil-trash-alt btn-danger"
+              <button
+                className={`uil-trash-alt ${item.isActive == 1? 'btn-danger':'btn-success'}`}
                 style={{
-                  marginLeft:"5px",
                   cursor: "pointer",
                   color: "white",
                   fontSize: ".7em",
                   padding: ".3rem",
                   borderRadius: ".3rem"
                 }}
-                onClick={() => setDelete_modal_center(true)}
-              >Inactive
-              </div>
+                onClick={() => {selectedItem.current=item.id; setDelete_modal_center(true);}}
+              >{item.isActive == 1? 'Inactive':'Active'}
+              </button>
             </div>
           );
         });
@@ -146,7 +157,6 @@ const DatatableTables = () => {
                   responsive 
                   striped 
                   bordered 
-                  loading
                   data={listData} />
                   :
                   <TableLoader/>
@@ -176,51 +186,11 @@ const DatatableTables = () => {
               </button>
             </div>
             <div className="modal-body" style={{padding:"0"}}>
-              <UserModal id={selectedId.current} handleCallback={handleCallback}/>
+              <UserModal id={selectedItem.current} handleCallback={handleCallback}/>
             </div>
           </Modal>
 
-          <CustomModal modelShow={delete_modal_center} handleCallback={deleteConfirmation}/>
-          <Modal
-            size="lg"
-            isOpen={modal_center}
-            centered={true}>
-              
-            <div className="modal-header">
-              <h5 className="modal-title mt-0">User Active/Inactive Confirmation</h5>
-              <button
-                type="button"
-                onClick={() => {
-                  setDelete_modal_center(false)
-                }}
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              > 
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body" style={{padding:"0"}}>
-            <Row>
-                <Col xl="12">
-                    <Card>
-                        <CardBody>
-                            <Row>
-                                <Col md="12">
-                                  Are you sure you want to 
-                                </Col>
-                            </Row>
-                            <Col style={{textAlign: 'right'}}>
-                            <Button color="primary" type="submit">
-                                Submit
-                            </Button>
-                            </Col>
-                        </CardBody>
-                    </Card>
-                </Col>
-            </Row>
-            </div>
-          </Modal>
+          <CustomModal modelShow={delete_modal_center} handleCallback={modalCallback}/>
         </Col>
       </div>
     </>

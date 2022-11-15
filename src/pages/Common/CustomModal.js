@@ -35,12 +35,12 @@ const CustomModal = (props) => {
     <Row>
         <Col xl="12">
           <Modal
-            size="lg"
+            size="sm"
             isOpen={modal_center}
             centered={true}>
               
             <div className="modal-header">
-              <h5 className="modal-title mt-0">User Active/Inactive Confirmation</h5>
+              <h5 className="modal-title mt-0">Action Confirmation !</h5>
               <button
                 type="button"
                 onClick={() => {
@@ -54,27 +54,21 @@ const CustomModal = (props) => {
               </button>
             </div>
             <div className="modal-body" style={{padding:"0"}}>
-            <Row>
-                <Col xl="12">
-                    <Card>
-                        <CardBody>
-                            <Row>
-                                <Col md="12">
-                                  Are you sure you want to 
-                                </Col>
-                            </Row>
-                            <Col style={{textAlign: 'right'}}>
-                            <Button color="primary" type="submit" onClick={()=>submitEvent(true)}>
-                                Confirm
-                            </Button>
-                            <Button color="primary" type="submit" onClick={()=>submitEvent(false)}>
-                                Cancel
-                            </Button>
-                            </Col>
-                        </CardBody>
-                    </Card>
-                </Col>
-            </Row>
+                <CardBody>
+                    <Row>
+                        <Col md="12">
+                            Are you sure about this action ?
+                        </Col>
+                    </Row>
+                </CardBody>
+            </div>
+            <div className="modal-footer customBtnArea" style={{textAlign: 'right'}}>
+                <Button color="primary" type="submit" className="btn btn-sm" onClick={()=>submitEvent(true)}>
+                    Yes
+                </Button>
+                <Button color="danger" type="submit" className="btn btn-sm" onClick={()=>submitEvent(false)}>
+                    No
+                </Button>
             </div>
           </Modal>
         </Col>
