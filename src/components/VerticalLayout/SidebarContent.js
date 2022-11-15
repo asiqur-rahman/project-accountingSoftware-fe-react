@@ -1,5 +1,5 @@
 import PropTypes from "prop-types"
-import React, { useEffect, useRef , useCallback} from "react"
+import React, { useEffect, useRef , useCallback, useState} from "react"
 
 // //Import Scrollbar
 import SimpleBar from "simplebar-react"
@@ -8,12 +8,14 @@ import SimpleBar from "simplebar-react"
 import MetisMenu from "metismenujs"
 import { withRouter } from "react-router-dom"
 import { Link } from "react-router-dom"
+import * as Session from "../../helpers/session_helper"
 
 //i18n
 import { withTranslation } from "react-i18next"
 
 const SidebarContent = props => {
   const ref = useRef()
+  const [adminUser, setAdminUser ]=useState(false);
   const activateParentDropdown = useCallback((item) => {
     item.classList.add("active")
     const parent = item.parentElement
@@ -67,9 +69,13 @@ const SidebarContent = props => {
     }
     initMenu()
   }, [props.location.pathname, activateParentDropdown])
+
   useEffect(() => {
+    const sessionUser=Session.getUser()
+    if(sessionUser && sessionUser.role_code==='1') setAdminUser(true)
     ref.current.recalculate()
   }, []);
+
   const scrollElement = (item) => {
     if (item) {
       const currentPosition = item.offsetTop
@@ -98,6 +104,7 @@ const SidebarContent = props => {
 
             <li className="menu-title">{props.t("Account")}</li>
 
+            {adminUser &&
             <li>
               <Link to="/#" className="has-arrow waves-effect">
                 <i className="mdi mdi-clipboard-account"></i>
@@ -112,6 +119,7 @@ const SidebarContent = props => {
                 </li>
               </ul>
             </li>
+            }
 
             <li>
               <Link to="/#" className="has-arrow waves-effect">
@@ -130,6 +138,7 @@ const SidebarContent = props => {
 
             <li className="menu-title">{props.t("Cheque")}</li>
 
+            {adminUser &&
             <li>
               <Link to="/#" className="has-arrow waves-effect">
                 <i className="mdi mdi-bank"></i>
@@ -144,6 +153,7 @@ const SidebarContent = props => {
                 </li>
               </ul>
             </li>
+            }
 
             <li>
               <Link to="/#" className="has-arrow waves-effect">
@@ -180,6 +190,7 @@ const SidebarContent = props => {
               </ul>
             </li>
 
+            {adminUser && <>
             <li className="menu-title">{props.t("User")}</li>
 
             <li>
@@ -196,6 +207,7 @@ const SidebarContent = props => {
                 </li>
               </ul>
             </li>
+            </>}
 
             {/* <li className="menu-title">{props.t("Other")}</li>
 

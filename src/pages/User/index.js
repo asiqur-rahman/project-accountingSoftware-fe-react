@@ -63,6 +63,7 @@ const DatatableTables = () => {
   const [listData, setListData] = useState(false)
   const [modal_center, setmodal_center] = useState(false)
   const [delete_modal_center, setDelete_modal_center] = useState(false)
+  const [reset_modal_center, setReset_modal_center] = useState(false)
   const selectedItem = useRef(0)
 
   function showUpdateModal(id) {
@@ -76,7 +77,7 @@ const DatatableTables = () => {
     loadList();
   }
 
-  const modalCallback = async (result) =>{
+  const modalCallbackStatus = async (result) =>{
     if(result){
       await Axios.patch(`/user/changeStatus/${selectedItem.current}`)
         .then((response) => {
@@ -93,6 +94,19 @@ const DatatableTables = () => {
     setDelete_modal_center(false);
   }
 
+  const modalCallbackReset = async (result) =>{
+    if(result){
+      await Axios.post(`/user/password-reset/${selectedItem.current}`)
+        .then((response) => {
+          alert(response.data.message)
+        })
+        .catch((e)=>{
+            var e=e
+        })
+    }
+    setReset_modal_center(false);
+  }
+
   const loadList = async () =>{
     setListData(false);
     await Axios.get("/user/list")
@@ -102,7 +116,7 @@ const DatatableTables = () => {
           item.action = (
             <div style={{ display: "flex" }} className="customBtnArea">
               <button
-                className="uil-trash-alt btn-primary"
+                className="btn-primary"
                 style={{
                   cursor: "pointer",
                   color: "white",
@@ -115,7 +129,7 @@ const DatatableTables = () => {
               </button>
 
               <button
-                className={`uil-trash-alt ${item.isActive == 1? 'btn-danger':'btn-success'}`}
+                className={`${item.isActive == 1? 'btn-danger':'btn-success'}`}
                 style={{
                   cursor: "pointer",
                   color: "white",
@@ -125,6 +139,19 @@ const DatatableTables = () => {
                 }}
                 onClick={() => {selectedItem.current=item.id; setDelete_modal_center(true);}}
               >{item.isActive == 1? 'Inactive':'Active'}
+              </button>
+
+              <button
+                className={`btn-warning`}
+                style={{
+                  cursor: "pointer",
+                  color: "white",
+                  fontSize: ".7em",
+                  padding: ".3rem",
+                  borderRadius: ".3rem"
+                }}
+                onClick={() => {selectedItem.current=item.id; setReset_modal_center(true);}}
+              >Reset
               </button>
             </div>
           );
@@ -190,7 +217,8 @@ const DatatableTables = () => {
             </div>
           </Modal>
 
-          <CustomModal modelShow={delete_modal_center} handleCallback={modalCallback}/>
+          <CustomModal modelShow={delete_modal_center} handleCallback={modalCallbackStatus}/>
+          <CustomModal modelShow={reset_modal_center} handleCallback={modalCallbackReset} bodyMsg={"New password will sent to the user through user email address."}/>
         </Col>
       </div>
     </>

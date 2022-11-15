@@ -57,7 +57,7 @@ const CustomModal = (props) => {
                 <CardBody>
                     <Row>
                         <Col md="12">
-                            Are you sure about this action ?
+                            {props.bodyMsg?props.bodyMsg:"Are you sure about this action ?"}
                         </Col>
                     </Row>
                 </CardBody>
