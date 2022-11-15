@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react"
 import { MDBDataTable } from "mdbreact"
-import { Row, Col, Card, CardBody, Modal } from "reactstrap"
+import { Row, Col, Card, CardBody, Modal, Button } from "reactstrap"
 
 //Import Breadcrumb
 import Breadcrumbs from "../../components/Common/Breadcrumb"
@@ -8,6 +8,7 @@ import "./datatables.scss"
 import TableLoader from "../../components/Common/TableLoader"
 import Axios from "../../helpers/axios_helper"
 import UserModal from "./model"
+import CustomModal from "../Common/Modal"
 
 var tabledata = {
   columns: [
@@ -59,17 +60,18 @@ var tabledata = {
 
 const DatatableTables = () => {
 
-  const [listData, setListData] = useState(false);
+  const [listData, setListData] = useState(false)
   const [modal_center, setmodal_center] = useState(false)
-  const selectedCheque = useRef(0)
+  const [delete_modal_center, setDelete_modal_center] = useState(false)
+  const selectedId = useRef(0)
 
   function showUpdateModal(id) {
-    selectedCheque.current = id;
+    selectedId.current = id;
     setmodal_center(true);
   }
 
   const handleCallback = (details) =>{
-    selectedCheque.current=0;
+    selectedId.current=0;
     setmodal_center(false);
     loadList();
   }
@@ -92,8 +94,21 @@ const DatatableTables = () => {
                   borderRadius: ".3rem"
                 }}
                 onClick={() => showUpdateModal(item.id)}
-              >
-                Details
+              >Details
+              </div>
+
+              <div
+                className="uil-trash-alt btn-danger"
+                style={{
+                  marginLeft:"5px",
+                  cursor: "pointer",
+                  color: "white",
+                  fontSize: ".7em",
+                  padding: ".3rem",
+                  borderRadius: ".3rem"
+                }}
+                onClick={() => setDelete_modal_center(true)}
+              >Inactive
               </div>
             </div>
           );
@@ -139,8 +154,8 @@ const DatatableTables = () => {
           <Modal
             size="lg"
             isOpen={modal_center}
-            centered={true}
-          >
+            centered={true}>
+
             <div className="modal-header">
               <h5 className="modal-title mt-0">Update User</h5>
               <button
@@ -156,7 +171,49 @@ const DatatableTables = () => {
               </button>
             </div>
             <div className="modal-body" style={{padding:"0"}}>
-              <UserModal id={selectedCheque.current} handleCallback={handleCallback}/>
+              <UserModal id={selectedId.current} handleCallback={handleCallback}/>
+            </div>
+          </Modal>
+
+          {/* <CustomModal modelShow={delete_modal_center} handleCallback={handleCallback}/> */}
+          <Modal
+            size="lg"
+            isOpen={modal_center}
+            centered={true}>
+              
+            <div className="modal-header">
+              <h5 className="modal-title mt-0">User Active/Inactive Confirmation</h5>
+              <button
+                type="button"
+                onClick={() => {
+                  setDelete_modal_center(false)
+                }}
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              > 
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body" style={{padding:"0"}}>
+            <Row>
+                <Col xl="12">
+                    <Card>
+                        <CardBody>
+                            <Row>
+                                <Col md="12">
+                                  Are you sure you want to 
+                                </Col>
+                            </Row>
+                            <Col style={{textAlign: 'right'}}>
+                            <Button color="primary" type="submit">
+                                Submit
+                            </Button>
+                            </Col>
+                        </CardBody>
+                    </Card>
+                </Col>
+            </Row>
             </div>
           </Modal>
         </Col>
