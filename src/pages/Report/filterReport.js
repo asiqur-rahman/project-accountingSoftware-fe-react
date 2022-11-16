@@ -7,6 +7,7 @@ import {
   Button,
   Label
 } from "reactstrap"
+import Select from "react-select";
 import { MDBDataTable } from "mdbreact"
 
 //Import Flatepicker
@@ -58,13 +59,25 @@ var tableData = {
 const IncomeStatement = () => {
 
   const [listData, setListData] = useState(false)
+  const [allAccounts, setAllAccounts] = useState([])
+  const [selectedMulti, setselectedMulti] = useState(false);
   const [fromDateTime, setFromDateTime] = useState(moment().format("YYYY-MM-DD"))
   const [toDateTime, setToDateTime] = useState(moment().format("YYYY-MM-DD"))
 
   const loadList =async ()=>{
+    setListData(false)
+    var accounts=[];
+    if(selectedMulti.length > 0){
+      selectedMulti.forEach(account=>{
+        accounts.push(account.value)
+      })
+    }else{
+      accounts.push(0)
+    }
     const data={
       fromDate:fromDateTime,
-      todate:toDateTime
+      toDate:toDateTime,
+      accounts: accounts.join(',')
     }
     await Axios.post("/report/custom-report",data)
     .then((response) => { 
@@ -80,9 +93,21 @@ const IncomeStatement = () => {
     })
   }
 
-  // useEffect(async () => {
-  //   loadList();
-  // },[]);
+  function handleMulti(selectedMulti) {
+    setselectedMulti(selectedMulti);
+  }
+
+  useEffect(async () => {
+    await Axios.get("/account/allDD")
+        .then((response) => { 
+        if(response.data.status===200){
+            setAllAccounts(response.data.data);
+        }
+        else{
+            setAllAccounts([])
+        }
+    });
+  },[]);
 
   return (
     <>
@@ -95,7 +120,7 @@ const IncomeStatement = () => {
             <Card>
               <CardBody>
                 <Row>
-                  <Col md="5">
+                  <Col md="3">
                     <div className="mb-3">
                         <Label>From Date</Label>
                         <Flatpickr
@@ -116,7 +141,7 @@ const IncomeStatement = () => {
                         />
                     </div>
                   </Col>
-                  <Col md="5">
+                  <Col md="3">
                     <div className="mb-3">
                         <Label>To Date</Label>
                         <Flatpickr
@@ -136,6 +161,21 @@ const IncomeStatement = () => {
                             }}
                         />
                     </div>
+                  </Col>
+                  <Col md="4">
+                    <div className="mb-3">
+                      <label className="control-label">Chart of Account</label>
+                      <Select
+                        value={selectedMulti}
+                        placeholder="All Chart of Accounts"
+                        isMulti={true}
+                        onChange={(e) => {
+                          handleMulti(e);
+                        }}
+                        options={allAccounts}
+                        classNamePrefix="select2-selection"
+                      />
+                  </div>
                   </Col>
                   <Col style={{textAlign: 'right'}}>
                     <Button color="primary" onClick={()=>loadList()} type="button" style={{position:'absolute',bottom:'17%',right:'10%'}}>
