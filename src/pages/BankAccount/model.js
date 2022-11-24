@@ -121,6 +121,8 @@ const Model = (props) => {
                                 placeholder="Description"
                                 type="textarea"
                                 className="form-control"
+                                errorMessage="Please provide description."
+                                validate={{ required: { value: true } }}
                                 id="validationCustom05"
                             />
                             </div>

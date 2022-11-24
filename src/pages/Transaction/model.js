@@ -106,8 +106,8 @@ const Model = (props) => {
         })
         if(totalCredit==totalDebit && totalCredit==values.amount){
             const jsonData ={
-                debitAccountId:isItIncome?accountFromId:accountToId,
-                creditAccountId:isItIncome?accountToId:accountFromId,
+                debitAccountId:isItIncome?accountFromId:accountFromId,
+                creditAccountId:isItIncome?accountToId:accountToId,
                 transactionNo:Date.now().toString(),
                 dateTime:dateTime,
                 amount:values.amount,

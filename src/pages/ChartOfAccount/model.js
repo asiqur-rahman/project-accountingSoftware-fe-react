@@ -149,13 +149,13 @@ const Model = (props) => {
                         </Col>
                         <Col md="6">
                         <div className="mb-3">
-                            <Label htmlFor="validationCustom04">Initial Amount</Label>
+                            <Label htmlFor="validationCustom04">Balance</Label>
                             <AvField
                             name="amount"
                             placeholder="0"
                             defaultValue={updateData['accountBalances.amount']}
                             type="number"
-                            errorMessage=" Please provide initial amount."
+                            errorMessage=" Please provide balance."
                             className="form-control"
                             validate={{ required: { value: true } }}
                             id="validationCustom04"
