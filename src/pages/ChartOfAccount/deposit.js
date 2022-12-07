@@ -28,11 +28,16 @@ const Model = (props) => {
   const [updateData, setUpdateData] = useState(false)
 
   const handleSubmit = async (event, errors, values) => {
-    if(updateData){
-      values.parentId=chartOfAccountId;
-      values.currencyId=currencyId;
+    if(parseInt(values.amount)<0){
+      alert("Deposit balance can't be negative")
+    }
+    else if(updateData){
+      values.parentId=updateData.parentId;
+      values.currencyId=updateData.currencyId;
       values.isActive=1;
       values.id=updateData.id;
+      values.dateTime=new Date();
+      values.name=updateData.name;
       await Axios.patch(`/account/id/${updateData.id}`,values)
       .then((response) => {
       if(response.data.status===201){
@@ -111,57 +116,33 @@ const Model = (props) => {
                     <AvForm className="needs-validation" onSubmit={handleSubmit}>
                     <Row>
                         <Col md="6">
-                        <div className="mb-3">
-                            <Label htmlFor="validationCustom01">Parent</Label>
-                            <Select
-                                options={chartOfAccounts}
-                                value={chartOfAccounts.filter(x=>x.value==chartOfAccountId)[0]}
-                                onChange={(e)=>{setChartOfAccountId(e.value);}}
-                                name="bankAccountId"
-                            />
-                        </div>
+                          <div className="mb-3">
+                              <Label htmlFor="validationCustom03">Current Balance</Label>
+                              <AvField
+                              name="currentAmount"
+                              placeholder="0"
+                              defaultValue={updateData['accountBalances.amount']}
+                              type="number"
+                              readOnly={true}
+                              className="form-control"
+                              validate={{ required: { value: false } }}
+                              id="validationCustom03"
+                              />
+                          </div>
                         </Col>
                         <Col md="6">
-                        <div className="mb-3">
-                            <Label htmlFor="validationCustom03">Name</Label>
-                            <AvField
-                                name="name"
-                                defaultValue={updateData.name}
-                                placeholder="Name"
-                                type="text"
-                                errorMessage=" Please provide a name."
-                                className="form-control"
-                                validate={{ required: { value: true } }}
-                                id="validationCustom03"
-                            />
-                        </div>
-                        </Col>
-                        <Col md="6">
-                        <div className="mb-3">
-                            <Label htmlFor="validationCustom02">Currency</Label>
-                            <Select
-                                options={currencies}
-                                value={currencies.filter(x=>x.value==currencyId)[0]}
-                                onChange={(e)=>{setCurrencyId(e.value);}}
-                                name="bankAccountId"
-                            />
-                        </div>
-                        </Col>
-                        <Col md="6">
-                        <div className="mb-3">
-                            <Label htmlFor="validationCustom04">Balance</Label>
-                            <AvField
-                            name="amount"
-                            placeholder="0"
-                            defaultValue={updateData['accountBalances.amount']}
-                            type="number"
-                            errorMessage=" Please provide balance."
-                            className="form-control"
-                            readOnly={chartOfAccountId>0}
-                            validate={{ required: { value: true } }}
-                            id="validationCustom04"
-                            />
-                        </div>
+                          <div className="mb-3">
+                              <Label htmlFor="validationCustom04">Deposit Amount</Label>
+                              <AvField
+                              name="amount"
+                              placeholder="0"
+                              type="number"
+                              errorMessage=" Please provide balance."
+                              className="form-control"
+                              validate={{ required: { value: true } }}
+                              id="validationCustom04"
+                              />
+                          </div>
                         </Col>
                     </Row>
                     <Col style={{textAlign: 'right'}}>
