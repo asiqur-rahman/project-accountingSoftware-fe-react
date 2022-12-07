@@ -123,7 +123,7 @@ const ChartOfAccount = () => {
                                       return (
                                         <li key={i3}>
                                           <span>{item3.name} (
-                                            <button onClick={() => showDepositModal(item2.id)} style={{background:"none",border:"none",padding:"0",margin:"0",fontWeight:"bold",color:"green"}}>Deposit</button>/
+                                            <button onClick={() => showDepositModal(item3.id)} style={{background:"none",border:"none",padding:"0",margin:"0",fontWeight:"bold",color:"green"}}>Deposit</button>/
                                             <button onClick={() => showUpdateModal(item3.id)} style={{background:"none",border:"none",padding:"0",margin:"0",fontWeight:"bold",color:"blue"}}>Edit</button>/
                                             <button onClick={() => handleCoaDelete(item3.id,item3['accountBalances.amount'])} style={{background:"none",border:"none",padding:"0",margin:"0",fontWeight:"bold",color:"red"}}>Delete</button>
                                             )<p> {item3['accountBalances.amount']} Tk.</p></span>
@@ -132,7 +132,7 @@ const ChartOfAccount = () => {
                                               return (
                                                 <li key={i4}>
                                                   <span>{item4.name} (
-                                                    <button onClick={() => showDepositModal(item2.id)} style={{background:"none",border:"none",padding:"0",margin:"0",fontWeight:"bold",color:"green"}}>Deposit</button>/
+                                                    <button onClick={() => showDepositModal(item4.id)} style={{background:"none",border:"none",padding:"0",margin:"0",fontWeight:"bold",color:"green"}}>Deposit</button>/
                                                     <button onClick={() => showUpdateModal(item4.id)} style={{background:"none",border:"none",padding:"0",margin:"0",fontWeight:"bold",color:"blue"}}>Edit</button>/
                                                     <button onClick={() => handleCoaDelete(item4.id,item4['accountBalances.amount'])} style={{background:"none",border:"none",padding:"0",margin:"0",fontWeight:"bold",color:"red"}}>Delete</button>
                                                     )<p> {item4['accountBalances.amount']} Tk.</p></span>

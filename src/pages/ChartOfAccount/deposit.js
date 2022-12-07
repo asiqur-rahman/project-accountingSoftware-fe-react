@@ -21,9 +21,7 @@ import { useHistory  } from "react-router-dom"
 
 const Model = (props) => {
   const history = useHistory()
-  const [chartOfAccounts, setChartOfAccounts] = useState([])
   const [chartOfAccountId, setChartOfAccountId] = useState(0)
-  const [currencies, setCurrencies] = useState([])
   const [currencyId, setCurrencyId] = useState(0)
   const [updateData, setUpdateData] = useState(false)
 
@@ -81,29 +79,6 @@ const Model = (props) => {
         }
         })
     }
-    await Axios.get("/account/allDD")
-    .then((response) => { 
-      if(response.data.status===200){
-        setChartOfAccounts(response.data.data);
-      }
-      else{
-        setChartOfAccounts([])
-      }
-    }).catch(e=>{
-        setChartOfAccounts([])
-    });
-
-    await Axios.get("/account/currency/dropdown")
-    .then((response) => { 
-      if(response.data.status===200){
-        setCurrencies(response.data.data);
-      }
-      else{
-        setCurrencies([])
-      }
-    }).catch(e=>{
-        setCurrencies([])
-    });
   },[props.id]);
 
 
@@ -115,13 +90,29 @@ const Model = (props) => {
                 <CardBody>
                     <AvForm className="needs-validation" onSubmit={handleSubmit}>
                     <Row>
+                        <Col md="12">
+                        <div className="mb-3">
+                            <Label htmlFor="validationCustom03">Name</Label>
+                            <AvField
+                                name="name"
+                                value={updateData.name}
+                                placeholder="Name"
+                                type="text"
+                                errorMessage=" Please provide a name."
+                                className="form-control"
+                                validate={{ required: { value: true } }}
+                                id="validationCustom03"
+                                readOnly={true}
+                            />
+                        </div>
+                        </Col>
                         <Col md="6">
                           <div className="mb-3">
                               <Label htmlFor="validationCustom03">Current Balance</Label>
                               <AvField
                               name="currentAmount"
                               placeholder="0"
-                              defaultValue={updateData['accountBalances.amount']}
+                              value={updateData['accountBalances.amount']}
                               type="number"
                               readOnly={true}
                               className="form-control"
