@@ -20,7 +20,7 @@ import ChequeCreate from "../pages/Cheque/create"
 import BalanceSheet from "../pages/Report/balanceStatement"
 import IncomeStatement from "../pages/Report/incomeStatement"
 import CustomReport from "../pages/Report/filterReport"
-
+import ChequeReport from "../pages/Report/chequeReport"
 
 // User
 import UserIndex from "../pages/User/index"
@@ -56,6 +56,7 @@ const userRoutes = [
   { path: "/balance-sheet", component: BalanceSheet },
   { path: "/income-statement", component: IncomeStatement },
   { path: "/custom-report", component: CustomReport },
+  { path: "/cheque-report", component: ChequeReport },
 
     
   //User

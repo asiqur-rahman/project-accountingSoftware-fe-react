@@ -60,7 +60,7 @@ var transactionDetailsData = {
     },
     {
       label: "Date",
-      field: "dateTime",
+      field: "transaction.dateTime",
       sort: "asc",
       width: 200,
     },
