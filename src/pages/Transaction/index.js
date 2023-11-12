@@ -108,6 +108,22 @@ const DatatableTables = () => {
     });
   }
 
+  const deleteTran = async (id) => {
+    await Axios.delete(`/transaction/id/${id}`)
+    .then((response) => { 
+      if(response.data.status===200){
+        transactionDetailsData.rows=response.data.data;
+        setTransactionDetails(transactionDetailsData);
+        setmodal_center(true);
+      }
+      else{
+        setTransactionDetails(false)
+      }
+    }).catch(e=>{
+      setTransactionDetails(false)
+    });
+  }
+
   useEffect(async () => {
     await Axios.get("/transaction/list")
     .then((response) => { 
@@ -127,6 +143,20 @@ const DatatableTables = () => {
                 onClick={() => showDetails(item.id)}
               >
                 Details
+              </div>
+
+              <div
+                className="uil-trash-alt btn-danger"
+                style={{
+                  cursor: "pointer",
+                  color: "white",
+                  fontSize: ".7em",
+                  padding: ".5rem",
+                  borderRadius: ".3rem"
+                }}
+                onClick={() => deleteTran(item.id)}
+              >
+                Delete
               </div>
             </div>
           );
