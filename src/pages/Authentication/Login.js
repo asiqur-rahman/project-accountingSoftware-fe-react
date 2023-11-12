@@ -151,7 +151,7 @@ const Login = (props) => {
                 {/* <p>Don't have an account ? <Link to="/register"
                   className="fw-medium text-primary"> Signup now </Link> </p> */}
                 <p>
-                  © {new Date().getFullYear()} e-Accounting360 <br/> Design & Develop by <a href={Config.applicationInfo.devOrgLink} target="_blank"><span style={{color: "#fd7014"}}>{Config.applicationInfo.devOrgName}</span></a>
+                  © {new Date().getFullYear()} e-Accounting360 <br/> Powered by <a href={Config.applicationInfo.devOrgLink} target="_blank"><span style={{color: "#fd7014"}}>{Config.applicationInfo.devOrgName}</span></a>
                 </p>
               </div>
             </Col>

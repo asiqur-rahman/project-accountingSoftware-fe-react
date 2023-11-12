@@ -13,7 +13,7 @@ const Footer = () => {
             <Col sm={6}>{new Date().getFullYear()} {Config.applicationInfo.appName}.</Col>
             <Col sm={6}>
               <div className="text-sm-end d-none d-sm-block">
-                Design & Develop by <a href={Config.applicationInfo.devOrgLink} target="_blank"><span style={{color: "#fd7014"}}>{Config.applicationInfo.devOrgName}</span></a>
+              Powered by <a href={Config.applicationInfo.devOrgLink} target="_blank"><span style={{color: "#fd7014"}}>{Config.applicationInfo.devOrgName}</span></a>
               </div>
             </Col>
           </Row>

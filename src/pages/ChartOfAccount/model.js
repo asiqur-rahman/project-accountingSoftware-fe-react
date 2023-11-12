@@ -21,6 +21,7 @@ import { useHistory  } from "react-router-dom"
 
 const Model = (props) => {
   const history = useHistory()
+  const [editMode, setEditMode] = useState(false)
   const [chartOfAccounts, setChartOfAccounts] = useState([])
   const [chartOfAccountId, setChartOfAccountId] = useState(0)
   const [currencies, setCurrencies] = useState([])
@@ -65,6 +66,7 @@ const Model = (props) => {
 
   useEffect(async () => {
     if(props.id && props.id > 0){
+      setEditMode(true)
         await Axios.get(`/account/id/${props.id}`)
         .then((response) => { 
         if(response.data.status===200){
@@ -157,7 +159,7 @@ const Model = (props) => {
                             type="number"
                             errorMessage=" Please provide balance."
                             className="form-control"
-                            readOnly={chartOfAccountId>0}
+                            readOnly={editMode}
                             validate={{ required: { value: true } }}
                             id="validationCustom04"
                             />

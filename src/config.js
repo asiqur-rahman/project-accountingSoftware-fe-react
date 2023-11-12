@@ -1,7 +1,7 @@
 module.exports = {
   applicationInfo:{
     appName: "e-Accounting360",
-    devOrgName: "DataCo Systems Limited",
-    devOrgLink: "https://datacosys.com"
+    devOrgName: "Bangladesh Institute of Management (BIM)",
+    devOrgLink: "https://bim.gov.bd/"
   }
 }
