@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react"
 import { MDBDataTable } from "mdbreact"
-import { Row, Col, Card, CardBody, Modal } from "reactstrap"
+import { Row, Col, Card, CardBody, Modal, Button } from "reactstrap"
+import downloadExcel from '../../helpers/dataExport_helper';
 
 //Import Breadcrumb
 import Breadcrumbs from "../../components/Common/Breadcrumb"
@@ -158,6 +159,18 @@ const DatatableTables = () => {
                   :
                   <TableLoader/>
                 }
+                {listData && listData.rows && 
+                <Col className="col-12" style={{textAlign:"center"}}>
+                  <Button
+                    onClick={() => {
+                      downloadExcel(listData.rows, 'Bank Accounts')
+                    }}
+                    color="success"
+                    className="btn btn-success mt-3 mt-lg-0 col-md-4 col-lg-2"
+                    >Export to CSV
+                  </Button>
+                </Col>
+              }
               </CardBody>
             </Card>
           </Col>

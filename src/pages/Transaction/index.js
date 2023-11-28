@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react"
 import { MDBDataTable } from "mdbreact"
-import { Row, Col, Card, CardBody, Modal } from "reactstrap"
+import { Row, Col, Card, CardBody, Modal, Button } from "reactstrap"
 
 //Import Breadcrumb
 import Breadcrumbs from "../../components/Common/Breadcrumb"
 import "./datatables.scss"
 import TableLoader from "../../components/Common/TableLoader"
 import Axios from "../../helpers/axios_helper"
+import downloadExcel from '../../helpers/dataExport_helper';
 
 var tabledata = {
   columns: [
@@ -163,6 +164,7 @@ const DatatableTables = () => {
         });
         tabledata.rows=response.data.data;
         setListData(tabledata);
+        // downloadExcel(tabledata.rows);
       }
       else{
         setListData(tabledata)
@@ -188,11 +190,24 @@ const DatatableTables = () => {
                   striped 
                   bordered 
                   hover
+                  exportToCSV={true}
                   noBottomColumns={true} 
                   data={listData} />
                   :
                   <TableLoader/>
                 }
+                {listData && listData.rows && 
+                <Col className="col-12" style={{textAlign:"center"}}>
+                  <Button
+                    onClick={() => {
+                      downloadExcel(listData.rows, 'Transactions')
+                    }}
+                    color="success"
+                    className="btn btn-success mt-3 mt-lg-0 col-md-4 col-lg-2"
+                    >Export to CSV
+                  </Button>
+                </Col>
+              }
               </CardBody>
             </Card>
           </Col>
@@ -226,6 +241,7 @@ const DatatableTables = () => {
                   bordered 
                   hover
                   noBottomColumns={true} 
+                  exportToCSV={true}
                   data={transactionDetails} />
                   :
                   <TableLoader/>

@@ -9,6 +9,7 @@ import {
 } from "reactstrap"
 import Select from "react-select";
 import { MDBDataTable } from "mdbreact"
+import downloadExcel from '../../helpers/dataExport_helper';
 
 //Import Flatepicker
 import "flatpickr/dist/themes/material_blue.css"
@@ -195,6 +196,18 @@ const IncomeStatement = () => {
                   data={listData} />
                 }
 
+              {listData && listData.rows && 
+                <Col className="col-12" style={{textAlign:"center"}}>
+                  <Button
+                    onClick={() => {
+                      downloadExcel(listData.rows, 'Transaction Report')
+                    }}
+                    color="success"
+                    className="btn btn-success mt-3 mt-lg-0 col-md-4 col-lg-2"
+                    >Export to CSV
+                  </Button>
+                </Col>
+              }
               </CardBody>
             </Card>
           </Col>
